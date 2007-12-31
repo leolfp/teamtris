@@ -2,6 +2,7 @@ package net.sf.teamtris.network;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,7 +15,7 @@ import net.sf.teamtris.arena.ServingArena;
  * @version 1.0
  * @created 31-dez-2007 14:01:01
  */
-public class ArenaServer implements Runnable {
+public class ArenaServer extends Thread {
 	private static final Log log = LogFactory.getLog(ArenaServer.class);
 	
 	private final ServingArena servedArena;	
@@ -24,11 +25,14 @@ public class ArenaServer implements Runnable {
 	 * @param servedArena The arena to be served on the network.
 	 */
 	public ArenaServer(ServingArena servedArena) {
+		super("ArenaServer");
 		this.servedArena = servedArena;
 	}
 
 	@Override
 	public void run() {
+		int id = 0;
+		
 		ServerSocket server;
 		try {
 			server = new ServerSocket(RemoteArena.REMOTE_PORT);
@@ -37,6 +41,16 @@ public class ArenaServer implements Runnable {
 			return;
 		}
 		
-		
+		while(!Thread.interrupted()){
+			try {
+				Socket connection = server.accept();
+				log.info("Accepted connection for '" + connection.getInetAddress() + "'.");
+				ArenaConnectionServer connServer = new ArenaConnectionServer(connection, servedArena, id++);
+				connServer.start();
+			} catch (IOException e) {
+				log.fatal("Fail to accept incomming connection.", e);
+				return;
+			}
+		}
 	}
 }

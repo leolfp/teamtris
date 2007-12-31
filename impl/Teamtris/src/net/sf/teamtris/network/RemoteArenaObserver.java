@@ -44,4 +44,16 @@ public class RemoteArenaObserver implements ArenaObserver {
 		
 	}
 
+	@Override
+	public void notifyGrow(int lines) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notifyHeight(Player player, int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
