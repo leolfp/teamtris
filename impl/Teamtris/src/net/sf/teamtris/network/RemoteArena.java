@@ -14,6 +14,7 @@ import net.sf.teamtris.arena.Player;
  * @created 31-dez-2007 14:01:15
  */
 public class RemoteArena implements Arena {
+	public static final int REMOTE_PORT = 1234;	
 
 	@Override
 	public Game getGame(Player player) {
