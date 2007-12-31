@@ -535,7 +535,9 @@ public class Game extends Object {
      */
     private class GamePanel extends Container {
         
-        /**
+		private static final long serialVersionUID = -4143065045762444179L;
+
+		/**
          * The component size. If the component has been resized, that 
          * will be detected when the paint method executes. If this 
          * value is set to null, the component dimensions are unknown.

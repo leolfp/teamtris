@@ -346,7 +346,9 @@ public class SquareBoard extends Object {
      */
     private class SquareBoardComponent extends Component {
 
-        /**
+		private static final long serialVersionUID = 4599769244977222094L;
+
+		/**
          * The component size. If the component has been resized, that 
          * will be detected when the paint method executes. If this 
          * value is set to null, the component dimensions are unknown.
@@ -394,14 +396,14 @@ public class SquareBoard extends Object {
          * This table is used to avoid calculating the lighter 
          * versions of the colors for each and every square drawn.
          */
-        private Hashtable  lighterColors = new Hashtable();
+        private Hashtable<Color, Color>  lighterColors = new Hashtable<Color, Color>();
 
         /**
          * A lookup table containing darker versions of the colors.
          * This table is used to avoid calculating the darker
          * versions of the colors for each and every square drawn.
          */
-        private Hashtable  darkerColors = new Hashtable();
+        private Hashtable<Color, Color>  darkerColors = new Hashtable<Color, Color>();
 
         /**
          * A flag set when the component has been updated.

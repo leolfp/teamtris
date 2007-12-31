@@ -32,7 +32,9 @@ import java.awt.event.WindowEvent;
  */
 public class Main extends Applet {
 
-    /**
+	private static final long serialVersionUID = 4594615343129981829L;
+
+	/**
      * The applet parameter information structure.
      */
     private static final String PARAMETER[][] = {
@@ -88,7 +90,8 @@ public class Main extends Applet {
         });
 
         // Show frame (and start game)
-        frame.show();
+        //frame.show();
+        frame.setVisible(true);
     }
 
     /**
