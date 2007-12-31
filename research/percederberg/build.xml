@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="tetris" default="package" basedir=".">
+
+
+<!-- CONFIGURABLE PARAMETERS -->
+  <property name="build.dir"
+      value="${basedir}" />
+
+
+<!-- PROJECT CLASS PATH -->
+  <path id="project.class.path">
+  </path>
+
+
+<!-- BUILD TARGETS -->
+  <target name="compile">
+    <delete dir="${build.dir}/classes" />
+    <delete dir="${build.dir}/lib" />
+    <mkdir dir="${build.dir}/classes" />
+    <mkdir dir="${build.dir}/lib" />
+    <javac srcdir="${build.dir}/src"
+           destdir="${build.dir}/classes"
+           classpathref="project.class.path"
+           target="1.1"
+           debug="on"
+           deprecation="on" />
+    <jar jarfile="${build.dir}/lib/tetris.jar"
+         includesfile="${build.dir}/LICENSE.txt">
+      <manifest>
+        <attribute name="Main-Class" 
+                   value="net.percederberg.tetris.Main" />
+      </manifest>
+      <fileset dir="${build.dir}/classes" />
+    </jar>
+  </target>
+
+  <target name="doc">
+    <delete dir="${build.dir}/doc" />
+    <mkdir dir="${build.dir}/doc" />
+    <javadoc packagenames="net.percederberg.tetris.*"
+             sourcepath="${build.dir}/src"
+             destdir="${build.dir}/doc"
+             classpath="${build.dir}/classes"
+             classpathref="project.class.path"
+             version="true"
+             use="true"
+             author="true"
+             windowtitle="Tetris Documentation" />
+  </target>
+
+  <target name="package" depends="compile,doc">
+    <property name="packagedir"
+              value="${build.dir}/package" />
+    <mkdir dir="${packagedir}" />
+    <copy todir="${packagedir}">
+      <fileset dir="${build.dir}" includes="*.txt,*.xml" />
+    </copy>
+    <copy todir="${packagedir}/lib">
+      <fileset dir="${build.dir}/lib" />
+    </copy>
+    <copy todir="${packagedir}/src">
+      <fileset dir="${build.dir}/src" />
+    </copy>
+    <copy todir="${packagedir}/doc">
+      <fileset dir="${build.dir}/doc" />
+    </copy>
+    <delete file="${build.dir}/tetris.zip" />
+    <zip zipfile="${build.dir}/tetris.zip"
+         basedir="${packagedir}" />
+    <delete dir="${packagedir}" />
+  </target>
+
+</project>
