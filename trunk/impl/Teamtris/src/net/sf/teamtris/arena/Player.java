@@ -1,5 +1,7 @@
 package net.sf.teamtris.arena;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * The player bean.
  * @author Leonardo
@@ -9,6 +11,9 @@ package net.sf.teamtris.arena;
 public class Player {
 	private static final String LOCAL_ORIGIN = "local";
 	
+	private static final AtomicInteger idGenerator = new AtomicInteger(0); 
+
+	private final int id = idGenerator.incrementAndGet();
 	private final String name;
 	private final String origin;
 
@@ -44,6 +49,14 @@ public class Player {
 	 */
 	public String getOrigin() {
 		return origin;
+	}
+	
+	/**
+	 * Obtains this player's unique identifier.
+	 * @return This player's id.
+	 */
+	public int getId(){
+		return id;
 	}
 
 }

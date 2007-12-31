@@ -41,4 +41,17 @@ public interface ArenaObserver {
 	 */
 	public void notifyUnregisteredPlayer(Player player);
 
+	/**
+	 * Indicates that your neighbour sent you a line growth.
+	 * @param lines The number of lines to grow.
+	 */
+	public void notifyGrow(int lines);
+
+	/**
+	 * Indicates a change in height in a player game.
+	 * @param player The player.
+	 * @param height The new height.
+	 */
+	public void notifyHeight(Player player, int height);
+
 }
