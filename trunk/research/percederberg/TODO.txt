@@ -1,0 +1,34 @@
+TODO.txt, v.1.2, 2003-01-30, Per Cederberg <per@percederberg.net>
+=================================================================
+
+
+1. Introduction
+---------------
+
+  This document contains a list of the currently known issues and 
+  suggested improvements to the Java Tetris game. Please verify that 
+  any new problem found is not in this list before sending a bug 
+  report.
+
+
+
+2. Known Issues
+---------------
+
+ o Under X Windows, the keyboard commands to move the figures do not 
+   work after pressing the 'Start' button. This is caused by an error
+   with the keyboard focus, and may be worked around by clicking once
+   on the game board. Any working solutions to this problem, would be
+   appreciated.
+
+
+
+3. Suggested Improvements
+-------------------------
+
+ o When lines are removed some Tetris games allow the squares above 
+   to fall down until they land again. Implementing this would 
+   probably require some animation when moving the squares.
+
+ o An automatic play mode (screen saver mode) could be written that 
+   plays the game by itself after a certain period of inactivity.

@@ -1,0 +1,61 @@
+VERSION.txt, v.1.2, 2003-01-30, Per Cederberg <per@percederberg.net>
+====================================================================
+
+
+Version 1.2 (2003-01-30):
+-------------------------
+
+ o Changed figure rotation at the top of the board. Figures can now 
+   be rotated, even though parts of them will end up outside the 
+   board (topside).
+
+ o Changed the figure introduction on the board to fall down one line 
+   at a time, instead of making the full figure visible all at once. 
+   If the whole figure cannot be introduced onto the board, the game
+   ends.
+   
+ o Changed the default figure colors somewhat to make them more 
+   different.
+
+ o Changed the resize behaviour for the game component. Everything 
+   now scales dynamically while keeping the aspect ratio. The font 
+   sizes are also changed accordingly.
+
+ o Added a speed level label just below the score label that displays 
+   the current game speed.
+
+ o Added a 'Paused' message on the board while the game is paused.
+
+ o Added possibilty to rotate figures clockwise (with Shift pressed)
+   or randomly (with Ctrl pressed).
+
+ o Added properties and applet parameters to set most colors.
+
+ o Added an Ant build file with automatic packaging. The compilation
+   and packaging is now fully reproducible.
+
+ o Added dummy MainBeanInfo and Main$COMClassObject classes in order
+   to avoid problems with some versions of Internet Explorer 
+   requesting these files by HTTP (which cause a HTTP 404 error).
+
+ o Renamed the Java package from gnu.app.game.tetris to 
+   net.percederberg.tetris. This has implications for scripts and
+   <applet> declarations in web pages.
+
+ o Improved code style. All the source code has been reindented to 
+   use spaces instead of tabs, and various minor code style 
+   improvements have been made in the source tree.
+   
+ o Refactored code in all classes and improved comments.
+
+
+Version 1.1 (2000-09-22):
+-------------------------
+
+ o Second public release of this game.
+
+
+Version 1.0 (?):
+-------------------------
+
+ o First public release of this game.
