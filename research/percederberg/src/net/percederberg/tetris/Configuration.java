@@ -36,7 +36,7 @@ public class Configuration extends Object {
      * properties, as some programs (applets) do not have the security
      * permissions to set system properties.
      */
-    private static Hashtable  config = new Hashtable();
+    private static Hashtable<String, String>  config = new Hashtable<String, String>();
 
     /**
      * Returns a configuration parameter value.
@@ -48,7 +48,7 @@ public class Configuration extends Object {
      */
     public static String getValue(String key) {
         if (config.containsKey(key)) {
-            return config.get(key).toString();
+            return config.get(key);
         } else {
             try {
                 return System.getProperty(key);
