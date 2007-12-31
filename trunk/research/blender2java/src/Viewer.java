@@ -1,16 +1,40 @@
-import javax.media.j3d.*;
-import javax.swing.*;
-import com.sun.j3d.utils.universe.*;
-import java.awt.*;
-import com.sun.j3d.utils.geometry.*;
-import java.util.*;
-import javax.vecmath.*;
-import java.awt.event.*;
-import com.sun.j3d.loaders.*;
-import java.beans.*;
-import java.io.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GraphicsConfiguration;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.beans.XMLDecoder;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.util.zip.GZIPInputStream;
+
+import javax.media.j3d.Alpha;
+import javax.media.j3d.AmbientLight;
+import javax.media.j3d.Appearance;
+import javax.media.j3d.BoundingSphere;
+import javax.media.j3d.BranchGroup;
+import javax.media.j3d.Canvas3D;
+import javax.media.j3d.ColoringAttributes;
+import javax.media.j3d.DirectionalLight;
+import javax.media.j3d.ImageComponent2D;
+import javax.media.j3d.Light;
+import javax.media.j3d.Material;
+import javax.media.j3d.PolygonAttributes;
+import javax.media.j3d.RenderingAttributes;
+import javax.media.j3d.RotationInterpolator;
+import javax.media.j3d.ScaleInterpolator;
+import javax.media.j3d.Shape3D;
+import javax.media.j3d.Texture;
+import javax.media.j3d.Texture2D;
+import javax.media.j3d.Transform3D;
+import javax.media.j3d.TransformGroup;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.vecmath.Color3f;
+import javax.vecmath.Vector3f;
+
 import com.sun.j3d.utils.image.TextureLoader;
+import com.sun.j3d.utils.universe.SimpleUniverse;
 
 public class Viewer {
 
@@ -42,7 +66,7 @@ public class Viewer {
 		scene.compile();
 
 		SimpleUniverse simpleU = new SimpleUniverse(canvas);
-		View theView = simpleU.getViewer().getView();
+		//View theView = simpleU.getViewer().getView();
 		TransformGroup
 			viewTransform = simpleU.getViewingPlatform().getViewPlatformTransform();
 		Transform3D finalTrans3D;
