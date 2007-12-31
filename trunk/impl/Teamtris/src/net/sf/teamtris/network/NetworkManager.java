@@ -1,5 +1,6 @@
 package net.sf.teamtris.network;
 import net.sf.teamtris.arena.Arena;
+import net.sf.teamtris.arena.ServingArena;
 
 /**
  * The entry point for the network subsystem.
@@ -19,4 +20,11 @@ public class NetworkManager {
 		return null;
 	}
 
+	/**
+	 * Starts serving the given arena over network.
+	 * @param arena The arena to serve.
+	 */
+	public static void serveArena(ServingArena arena){
+		// TODO Implement this!
+	}
 }
