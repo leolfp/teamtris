@@ -47,7 +47,7 @@ public class ArenaServer extends Thread {
 		while(!Thread.interrupted()){
 			try {
 				Socket connection = server.accept();
-				log.info("Accepted conn-" + id + " for '" + connection.getInetAddress().getHostAddress() + "'.");
+				log.info("Accepted sConn-" + id + " for '" + connection.getInetAddress().getHostAddress() + "'.");
 				ArenaConnectionServer connServer = new ArenaConnectionServer(connection, servedArena, id++);
 				connServer.start();
 			} catch (IOException e) {

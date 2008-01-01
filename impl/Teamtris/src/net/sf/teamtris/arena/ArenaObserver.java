@@ -12,11 +12,11 @@ import java.util.Map;
 public interface ArenaObserver {
 
 	/**
-	 * Indicates that the given player has lost the game.
-	 * @param lostPlayer The player that lost the game.
+	 * Indicates that the given player has won the game.
+	 * @param winnerPlayer The player that won the game.
 	 * @param statuses All the statuses for every player.
 	 */
-	public void notifyLostPlayer(Player lostPlayer, Map<Player,Status> statuses);
+	public void notifyWinnerPlayer(Player winnerPlayer, Map<Player,Status> statuses);
 
 	/**
 	 * Indicates that the given player has been added to the arena.
@@ -31,10 +31,20 @@ public interface ArenaObserver {
 	public void notifySortedPlayers(List<Player> players);
 
 	/**
-	 * Indicates that the game has been started.
+	 * Indicates that the game has been asked to start.
+	 */
+	public void notifyStartGame();
+
+	/**
+	 * Indicates that the game has already been started by the given player.
+	 */
+	public void notifyStartedGaming(Player player);
+
+	/**
+	 * Indicates that everybody has started gaming.
 	 */
 	public void notifyStartedGaming();
-
+	
 	/**
 	 * Indicates that the given player has been removed from the arena.
 	 * @param player The removed player.
@@ -53,5 +63,20 @@ public interface ArenaObserver {
 	 * @param height The new height.
 	 */
 	public void notifyHeight(Player player, int height);
+
+	/**
+	 * Indicates that the game has been paused by the given player.
+	 */
+	public void notifyPaused(Player player);
+	
+	/**
+	 * Indicates that the game has been paused by the given player.
+	 */
+	public void notifyResumed();
+
+	/**
+	 * Indicates that your current status on arena has changed.
+	 */
+	public void notifyStatus(Status status);
 
 }

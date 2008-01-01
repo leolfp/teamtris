@@ -20,4 +20,14 @@ public class ProtocolConfiguration {
 	 */
 	public static final Charset CHARSET = Charset.forName("UTF-8");
 	
+	/**
+	 * The name of the server.
+	 */
+	public static final String SERVER_NAME = "Teamtris";
+	
+	/**
+	 * The version of the server.
+	 */
+	public static final String VERSION = "0.1";
+	
 }

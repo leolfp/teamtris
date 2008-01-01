@@ -13,7 +13,7 @@ public interface Game {
 	 * Event post when the player has built lines.
 	 * @param howMany The number of lines built.
 	 */
-	public Status builtLines(int howMany);
+	public Status builtLines(int howMany) throws ArenaGamingException;
 
 	/**
 	 * Obtains the initialized piece stream.
@@ -30,12 +30,12 @@ public interface Game {
 	/**
 	 * Event post when the player has lost the game.
 	 */
-	public void lost();
+	public void lost() throws ArenaGamingException;
 
 	/**
 	 * Event post when the number of lines changes.
 	 * @param lines The number of lines height.
 	 */
-	public void height(int lines);
+	public void height(int lines) throws ArenaGamingException;
 
 }

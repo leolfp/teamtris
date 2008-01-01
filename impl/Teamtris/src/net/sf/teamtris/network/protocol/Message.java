@@ -154,8 +154,8 @@ public class Message {
 		if(getType().acceptParameter(parameter)){
 			this.parameters.put(parameter, value);
 		} else {
-			throw new IllegalArgumentException("Invalid parameter '" + parameter + "' for '" + type.name() +
-					"' message. Valid parameters are " + Arrays.toString(type.getParameters().toArray()) + ".");
+			throw new IllegalArgumentException("Invalid parameter for '" + type.name() +
+					"' message: was '" + parameter + "', expected in " + Arrays.toString(type.getParameters()) + ".");
 		}
 	}
 	
@@ -192,7 +192,20 @@ public class Message {
 	 * @return The parameter value as String.
 	 */
 	public String getString(String parameter){
-		return this.parameters.get(parameter);
+		if(this.parameters.containsKey(parameter)){
+			return this.parameters.get(parameter);
+		} else {
+			throw new IllegalArgumentException("Missing parameter for '" + type.name() + "' message: was '" +
+					parameter + "', expected in " + Arrays.toString(getParameters()) + ".");
+		}
+	}
+	
+	/**
+	 * Obtains this message's parameter names.
+	 * @return An array of parameter names.
+	 */
+	public String[] getParameters(){
+		return this.parameters.keySet().toArray(new String[this.parameters.size()]);
 	}
 
 	/**
