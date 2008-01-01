@@ -1,0 +1,46 @@
+welcome server=Teamtris;version=0.1
+>login name=john
+logged id=5
+in id=11;name=mary;origin=200.19.149.56
+in id=7;name=jack;origin=189.98.145.76
+in id=5;name=john;origin=60.12.45.73
+out id=7
+in id=14;name=ann;origin=60.137.77.49
+sorted ids=11,14,5
+in id=1;name=thomas;origin=54.17.183.46
+sorted ids=14,11,1,5
+options stream=pentagram;seed=341298675;level=10000;delay=2;single=100;double=300;triple=900;quad=1500
+sorted ids=14,1,5,11
+sorted ids=5,14,11,1
+options stream=classic;seed=5816323;level=5000;delay=3;single=100;double=300;triple=600;quad=1000
+start
+started id=11
+started id=14
+>starting
+started id=5
+started id=1
+status id=1;height=1
+status id=14;height=2
+status id=1;height=2
+>height lines=2
+status id=1;height=3
+status id=1;height=1
+grow lines=1
+>built lines=1
+status id=5;lines=1;points=100
+>pause
+paused id=5
+>resume
+resumed id=5
+
+...
+
+>lost
+finish winner=14
+status id=5;height=20;points=1800;lines=12
+status id=1;height=12;points=7100;lines=35
+status id=11;height=8;points=6700;lines=32
+status id=14;height=3;points=12500;lines=47
+end
+>logout
+bye
