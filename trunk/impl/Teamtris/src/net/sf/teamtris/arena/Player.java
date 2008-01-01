@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @created 31-dez-2007 14:01:54
  */
 public class Player {
-	private static final String LOCAL_ORIGIN = "local";
+	private static final String LOCAL_ORIGIN = "<local>";
 	
 	private static final AtomicInteger idGenerator = new AtomicInteger(0); 
 

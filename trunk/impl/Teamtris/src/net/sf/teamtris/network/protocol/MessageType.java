@@ -43,6 +43,7 @@ public enum MessageType {
 	// Ending phase
 	finish(new String[]{"winner"}),
 	end(),
+	error(new String[]{"type"}),
 	logout(),
 	bye(),
 	;

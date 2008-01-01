@@ -32,4 +32,10 @@ public interface Game {
 	 */
 	public void lost();
 
+	/**
+	 * Event post when the number of lines changes.
+	 * @param lines The number of lines height.
+	 */
+	public void height(int lines);
+
 }

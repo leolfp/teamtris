@@ -33,4 +33,10 @@ public class LocalGame implements Game {
 		// TODO Auto-generated method stub
 	}
 
+	@Override
+	public void height(int lines) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

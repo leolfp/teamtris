@@ -123,4 +123,10 @@ public class ServerMessageFactory {
 		return message;
 	}
 
+	public static Message error(String type){
+		Message message = new Message(MessageType.error);
+		message.setString("type", type);
+		return message;
+	}
+
 }
