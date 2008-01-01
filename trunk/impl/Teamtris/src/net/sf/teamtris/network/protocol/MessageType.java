@@ -1,9 +1,6 @@
 package net.sf.teamtris.network.protocol;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * The protocol message types enumeration.
@@ -19,7 +16,7 @@ public enum MessageType {
 	logged(new String[]{"id"}),
 
 	// Negotiation phase
-	in(new String[]{"id", "name"}),
+	in(new String[]{"id", "name", "origin"}),
 	out(new String[]{"id"}),
 	sorted(new String[]{"ids"}),
 	options(new String[]{"stream", "seed", "level", "delay", "single", "double", "triple", "quad"}),
@@ -48,21 +45,22 @@ public enum MessageType {
 	bye(),
 	;
 	
-	private final Set<String> parameters;
+	private final String[] parameters;
 	
 	private MessageType(){
 		this(new String[0]);
 	}
 	
 	private MessageType(String[] parameters) {
-		this.parameters = Collections.unmodifiableSet(new TreeSet<String>(Arrays.asList(parameters)));
+		Arrays.sort(parameters);
+		this.parameters = parameters;
 	}
 	
 	/**
 	 * Obtains all possible parameters for this message type.
 	 * @return A set containing this message possible parameters.
 	 */
-	public Set<String> getParameters(){
+	public String[] getParameters(){
 		return parameters;
 	}
 
@@ -72,6 +70,6 @@ public enum MessageType {
 	 * @return True if accepted, false otherwise.
 	 */
 	public boolean acceptParameter(String parameter){
-		return parameters.contains(parameter);
+		return Arrays.binarySearch(parameters, parameter) >= 0;
 	}
 }

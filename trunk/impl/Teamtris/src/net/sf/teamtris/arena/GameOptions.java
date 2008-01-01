@@ -11,15 +11,22 @@ public class GameOptions {
 	private final int pieceStreamSeed;
 	private final String pieceStreamType;
 	private final ScoringOptions scoringOptions;
+	private final int levelChangePoints;
+	private final int growDelay;
 
 	/**
-	 * @param pieceStreamType
-	 * @param pieceStreamSeed
-	 * @param scoringOptions
+	 * The default constructor for game options.
+	 * @param pieceStreamType The type of piece stream.
+	 * @param pieceStreamSeed The seed to be used on random piece stream.
+	 * @param levelChangePoints The divisor of score at which the level changes.
+	 * @param growDelay The delay, in seconds, to wait before growing.
+	 * @param scoringOptions The detailed scoring options.
 	 */
-	public GameOptions(String pieceStreamType, int pieceStreamSeed, ScoringOptions scoringOptions) {
+	public GameOptions(String pieceStreamType, int pieceStreamSeed, int levelChangePoints, int growDelay, ScoringOptions scoringOptions) {
 		this.pieceStreamType = pieceStreamType;
 		this.pieceStreamSeed = pieceStreamSeed;
+		this.levelChangePoints = levelChangePoints;
+		this.growDelay = growDelay;
 		this.scoringOptions = scoringOptions;
 	}
 
@@ -38,7 +45,23 @@ public class GameOptions {
 	public String getPieceStreamType() {
 		return pieceStreamType;
 	}
-	
+
+	/**
+	 * Obtains the level change score factor.
+	 * @return The score divisor at which the level changes.
+	 */
+	public int getLevelChangePoints() {
+		return levelChangePoints;
+	}
+
+	/**
+	 * Obtains the time to wait, in seconds, before applying a grow.
+	 * @return The grow delay time.
+	 */
+	public int getGrowDelay() {
+		return growDelay;
+	}
+
 	/**
 	 * Obtains the scoring options.
 	 * @return The scoring options.
@@ -46,5 +69,5 @@ public class GameOptions {
 	public ScoringOptions getScoringOptions() {
 		return scoringOptions;
 	}
-
+	
 }

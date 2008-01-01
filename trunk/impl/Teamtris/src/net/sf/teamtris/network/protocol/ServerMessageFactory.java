@@ -1,5 +1,8 @@
 package net.sf.teamtris.network.protocol;
 
+import static net.sf.teamtris.network.protocol.ProtocolConfiguration.SERVER_NAME;
+import static net.sf.teamtris.network.protocol.ProtocolConfiguration.VERSION;
+
 /**
  * A simple factory for common server messages.
  * @author Leonardo
@@ -10,9 +13,8 @@ public class ServerMessageFactory {
 
 	public static Message welcome(){
 		Message message = new Message(MessageType.welcome);
-		// TODO Externalize version and game server
-		message.setString("server", "Teamtris");
-		message.setString("version", "0.1");
+		message.setString("server", SERVER_NAME);
+		message.setString("version", VERSION);
 		return message;
 	}
 	

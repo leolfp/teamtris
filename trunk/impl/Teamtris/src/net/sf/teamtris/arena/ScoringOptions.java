@@ -60,4 +60,11 @@ public class ScoringOptions {
 		return quadLinePoints;
 	}
 
+	/**
+	 * Obtains the points score matrix.
+	 * @return An array of points.
+	 */
+	public int[] getPoints(){
+		return new int[] {singleLinePoints, doubleLinePoints, tripleLinePoints, quadLinePoints};
+	}
 }
