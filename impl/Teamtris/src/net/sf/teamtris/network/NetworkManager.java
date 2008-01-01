@@ -25,6 +25,8 @@ public class NetworkManager {
 	 * @param arena The arena to serve.
 	 */
 	public static void serveArena(ServingArena arena){
-		// TODO Implement this!
+		ArenaServer server = new ArenaServer(arena);
+		server.start();
+		// TODO How to stop serving the arena?
 	}
 }

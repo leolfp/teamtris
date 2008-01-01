@@ -1,5 +1,11 @@
 package net.sf.teamtris.network;
 
+import static net.sf.teamtris.network.protocol.ProtocolConfiguration.CHARSET;
+
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.net.Socket;
 import java.text.ParseException;
 import java.util.List;
@@ -28,7 +34,10 @@ public class ArenaConnectionServer extends Thread {
 	
 	private final Socket connection;
 	private final ServingArena servedArena;
-	private final int connectionId;
+	private final String connectionId;
+	
+	private final LineNumberReader reader;
+	private final BufferedOutputStream writer;
 		
 	private Player player;
 	
@@ -36,27 +45,42 @@ public class ArenaConnectionServer extends Thread {
 	 * The default constructor for an arena connection server.
 	 * @param connection The game connection.
 	 * @param servedArena The arena to be served.
+	 * @throws IOException If there is a failure getting socket streams.
 	 */
-	public ArenaConnectionServer(Socket connection, ServingArena servedArena, int connectionId){
+	public ArenaConnectionServer(Socket connection, ServingArena servedArena, int connectionId) throws IOException{
 		super("ArenaConnectionServer-" + connectionId);
 		this.connection = connection;
 		this.servedArena = servedArena;
-		this.connectionId = connectionId;
+		this.connectionId = "conn-" + connectionId;
+		
+		reader = new LineNumberReader(new InputStreamReader(connection.getInputStream(), CHARSET));
+		writer = new BufferedOutputStream(connection.getOutputStream());
 	}
 	
 	@Override
 	public void run() {
 		try {
-			login();
-		} catch (ProtocolException e) {
-			log.fatal("Protocol error serving game.", e);
-		} catch (ParseException e) {
-			log.fatal("Parse error serving game.", e);
+			try {
+				login();
+			} catch (ProtocolException e) {
+				write(ServerMessageFactory.error("protocol"));
+				log.fatal("Protocol error serving game on " + connectionId + ".", e);
+			} catch (ParseException e) {
+				write(ServerMessageFactory.error("message"));
+				log.fatal("Parse error serving game on " + connectionId + ".", e);
+			}
+		} catch (IOException e) {
+			log.fatal("IO error serving game on " + connectionId + ".", e);
+		} finally {
+			try {
+				connection.close();
+			} catch (IOException e) {
+				log.fatal("IO error closing server socket on " + connectionId + ".", e);
+			}
 		}
-		// TODO Properly close the resources
 	}
 	
-	private void login() throws ProtocolException, ParseException {
+	private void login() throws ProtocolException, ParseException, IOException {
 		// Welcome
 		write(ServerMessageFactory.welcome());
 		// Wait for login
@@ -73,20 +97,29 @@ public class ArenaConnectionServer extends Thread {
 	/**
 	 * Writes the given message on the socket.
 	 * @param message Message to be written.
+	 * @throws IOException On underlying socket write failure.
 	 */
-	private void write(Message message){
-		// TODO Implement this!
-		log.debug("Written on " + connectionId + ": " + message.serialize());
+	private void write(Message message) throws IOException {
+		String serializedMessage = message.serialize();
+		log.debug("Write on " + connectionId + ": " + serializedMessage);
+		writer.write((serializedMessage + "\r\n").getBytes(CHARSET));
+		writer.flush();
 	}
 	
 	/**
 	 * Reads the next message on the socket.
 	 * @return The read message.
+	 * @throws IOException On underlying socket read failure.
 	 */
-	private Message read() throws ParseException {
-		// TODO Implement this!
-		log.debug("Read on " + connectionId + ": ");
-		return null;
+	private Message read() throws ParseException, IOException {
+		String bareMessage = reader.readLine();
+		if(bareMessage != null){
+			log.debug("Read on " + connectionId + ": " + bareMessage);
+			Message message = Message.parse(bareMessage);
+			return message;
+		} else {
+			throw new IOException("End of input stream.");
+		}
 	}
 	
 	private class ArenaObserverServer implements ArenaObserver {
@@ -134,4 +167,5 @@ public class ArenaConnectionServer extends Thread {
 		}
 		
 	}
+
 }

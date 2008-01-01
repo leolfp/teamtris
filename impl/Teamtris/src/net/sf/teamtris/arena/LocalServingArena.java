@@ -35,6 +35,12 @@ public class LocalServingArena implements ServingArena {
 	}
 
 	@Override
+	public Game getGame() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public GameOptions getGameOptions() {
 		// TODO Auto-generated method stub
 		return null;

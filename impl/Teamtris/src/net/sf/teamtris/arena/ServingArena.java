@@ -9,6 +9,13 @@ package net.sf.teamtris.arena;
 public interface ServingArena extends Arena {
 
 	/**
+	 * Gets a given player game interaction on the arena.
+	 * @param player The player.
+	 * @return The game.
+	 */
+	public Game getGame(Player player);
+
+	/**
 	 * Initializes this arena to serve games with the given options.
 	 * @param options The game options.
 	 */
@@ -23,5 +30,18 @@ public interface ServingArena extends Arena {
 	 * Starts the games on the arena.
 	 */
 	public void startGaming();
+
+	/**
+	 * Registers a given player on the arena.
+	 * @param player The player (can be remote).
+	 * @param observer The arena observer.
+	 */
+	public void registerPlayer(Player player, ArenaObserver observer);
+
+	/**
+	 * Removes the player from the arena.
+	 * @param player The player to be removed.
+	 */
+	public void unregisterPlayer(Player player);
 
 }

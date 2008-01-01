@@ -14,7 +14,7 @@ public class ArenaManager {
 	 */
 	public static ServingArena getServingArena(){
 		// TODO Implement this!
-		return null;
+		return new LocalServingArena();
 	}
 
 }
