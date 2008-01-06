@@ -130,6 +130,15 @@ public class Message {
 	}
 
 	/**
+	 * Sets the message parameter as a long.
+	 * @param parameter The parameter name.
+	 * @param value The parameter value.
+	 */
+	public void setLong(String parameter, long value){
+		setString(parameter, ((Long) value).toString());
+	}
+	
+	/**
 	 * Sets the message parameter as an int.
 	 * @param parameter The parameter name.
 	 * @param values The parameter array of values.
@@ -168,6 +177,24 @@ public class Message {
 		return Integer.parseInt(getString(parameter));
 	}
 
+	/**
+	 * Obtains a message parameter as a long.
+	 * @param parameter The parameter name.
+	 * @return The parameter value as long.
+	 */
+	public long getLong(String parameter){
+		return Long.parseLong(getString(parameter));
+	}
+	
+	/**
+	 * Obtains a message parameter as a boolean.
+	 * @param parameter The parameter name.
+	 * @return The parameter value as boolean.
+	 */
+	public boolean getBoolean(String parameter){
+		return Boolean.valueOf(getString(parameter));
+	}
+	
 	/**
 	 * Obtains a message parameter as an array of ints.
 	 * @param parameter The parameter name.

@@ -19,7 +19,7 @@ public enum MessageType {
 	in(new String[]{"id", "name", "origin"}),
 	out(new String[]{"id"}),
 	sorted(new String[]{"ids"}),
-	options(new String[]{"stream", "seed", "level", "delay", "single", "double", "triple", "quad"}),
+	options(new String[]{"stream", "seed", "level", "delay", "grow", "single", "double", "triple", "quad"}),
 	
 	// Starting phase
 	start(),

@@ -13,6 +13,7 @@ public class GameOptions {
 	private final ScoringOptions scoringOptions;
 	private final int levelChangePoints;
 	private final int growDelay;
+	private final boolean growingGame;
 
 	/**
 	 * The default constructor for game options.
@@ -22,11 +23,12 @@ public class GameOptions {
 	 * @param growDelay The delay, in seconds, to wait before growing.
 	 * @param scoringOptions The detailed scoring options.
 	 */
-	public GameOptions(String pieceStreamType, int pieceStreamSeed, int levelChangePoints, int growDelay, ScoringOptions scoringOptions) {
+	public GameOptions(String pieceStreamType, int pieceStreamSeed, int levelChangePoints, int growDelay, boolean growingGame, ScoringOptions scoringOptions) {
 		this.pieceStreamType = pieceStreamType;
 		this.pieceStreamSeed = pieceStreamSeed;
 		this.levelChangePoints = levelChangePoints;
 		this.growDelay = growDelay;
+		this.growingGame = growingGame;
 		this.scoringOptions = scoringOptions;
 	}
 
@@ -62,6 +64,14 @@ public class GameOptions {
 		return growDelay;
 	}
 
+	/**
+	 * Checks if this game supports sending growths to other players.
+	 * @return True if growths are supported.
+	 */
+	public boolean isGrowingGame() {
+		return growingGame;
+	}
+	
 	/**
 	 * Obtains the scoring options.
 	 * @return The scoring options.

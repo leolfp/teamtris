@@ -15,7 +15,7 @@ public class PieceManager {
 	 */
 	public static PieceStream createPieceStream(String type, int seed){
 		// TODO Implement this!
-		return null;
+		return new ClassicTetrisPieceStream(seed);
 	}
 
 }

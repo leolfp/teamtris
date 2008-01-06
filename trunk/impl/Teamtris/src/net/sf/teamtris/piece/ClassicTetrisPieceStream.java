@@ -7,6 +7,11 @@ package net.sf.teamtris.piece;
  * @created 31-dez-2007 14:02:41
  */
 public class ClassicTetrisPieceStream implements PieceStream {
+	private final int seed;
+	
+	public ClassicTetrisPieceStream(int seed) {
+		this.seed = seed;
+	}
 
 	@Override
 	public Piece getNextPiece() {
