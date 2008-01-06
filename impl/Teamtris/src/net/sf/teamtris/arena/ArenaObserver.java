@@ -31,6 +31,12 @@ public interface ArenaObserver {
 	public void notifySortedPlayers(List<Player> players);
 
 	/**
+	 * Indicates that the game options have been modified.
+	 * @param options The new game options.
+	 */
+	public void notifyChangedOptions(GameOptions options);
+	
+	/**
 	 * Indicates that the game has been asked to start.
 	 */
 	public void notifyStartGame();
@@ -70,9 +76,9 @@ public interface ArenaObserver {
 	public void notifyPaused(Player player);
 	
 	/**
-	 * Indicates that the game has been paused by the given player.
+	 * Indicates that the game has been resumed by the given player.
 	 */
-	public void notifyResumed();
+	public void notifyResumed(Player player);
 
 	/**
 	 * Indicates that your current status on arena has changed.

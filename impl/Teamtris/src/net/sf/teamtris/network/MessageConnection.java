@@ -9,6 +9,8 @@ import java.io.LineNumberReader;
 import java.net.Socket;
 import java.text.ParseException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.sf.teamtris.network.protocol.Message;
 import net.sf.teamtris.network.protocol.MessageType;
@@ -30,6 +32,8 @@ public class MessageConnection {
 	private final LineNumberReader reader;
 	private final BufferedOutputStream writer;
 	private final String connectionId;
+	
+	private final Map<MessageType, MessageInterceptor> interceptors = new HashMap<MessageType, MessageInterceptor>();
 
 	/**
 	 * The default constructor for a message socket wrapper.
@@ -72,7 +76,9 @@ public class MessageConnection {
 	public void write(Message message) throws IOException {
 		String serializedMessage = message.serialize();
 		log.debug("Write on " + connectionId + ": " + serializedMessage);
-		writer.write((serializedMessage + "\r\n").getBytes(CHARSET));
+		synchronized (writer) {
+			writer.write((serializedMessage + "\r\n").getBytes(CHARSET));
+		}
 		writer.flush();
 	}
 	
@@ -83,13 +89,26 @@ public class MessageConnection {
 	 * @throws ParseException If there is an error parsing the received message.
 	 */
 	public Message read() throws ParseException, IOException {
-		String bareMessage = reader.readLine();
-		if(bareMessage != null){
-			log.debug("Read on " + connectionId + ": " + bareMessage);
-			Message message = Message.parse(bareMessage);
-			return message;
-		} else {
-			throw new IOException("End of input stream.");
+		for(;;){
+			String bareMessage;
+			synchronized (reader) {
+				bareMessage = reader.readLine();
+			}
+			if(bareMessage != null){
+				log.debug("Read on " + connectionId + ": " + bareMessage);
+				Message message = Message.parse(bareMessage);
+				synchronized (interceptors) {
+					if(interceptors.containsKey(message.getType())){
+						if(!interceptors.get(message.getType()).arrived(message)){
+							interceptors.remove(message.getType());
+						}
+					} else {
+						return message;
+					}
+				}
+			} else {
+				throw new IOException("End of input stream.");
+			}
 		}
 	}
 	
@@ -117,5 +136,26 @@ public class MessageConnection {
 			throw new ProtocolException("Wrong message type: was '" + message.getType().name() + "', expected '"+ type.name() + "'.");
 		}
 	}
+	
+	/**
+	 * Defines an interceptor for the given message type. The interceptor will be called whenever
+	 * a message of that type is read on the connection (instead of the read methods).
+	 * @param type The message type.
+	 * @param interceptor The interceptor.
+	 */
+	public void setInterceptor(MessageType type, MessageInterceptor interceptor){
+		synchronized (interceptors) {
+			interceptors.put(type, interceptor);
+		}
+	}
 
+	/**
+	 * Removes the interceptor for the given type.
+	 * @param type The type to be removed.
+	 */
+	public void removeInterceptor(MessageType type){
+		synchronized (interceptors) {
+			interceptors.remove(type);
+		}
+	}
 }

@@ -19,7 +19,7 @@ public interface ServingArena extends Arena {
 	 * Initializes this arena to serve games with the given options.
 	 * @param options The game options.
 	 */
-	public void init(GameOptions options);
+	public void configure(GameOptions options);
 
 	/**
 	 * Resorts the players on the arena.

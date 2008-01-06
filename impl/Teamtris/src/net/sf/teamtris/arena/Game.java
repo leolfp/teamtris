@@ -37,5 +37,20 @@ public interface Game {
 	 * @param lines The number of lines height.
 	 */
 	public void height(int lines) throws ArenaGamingException;
+	
+	/**
+	 * Pauses the game.
+	 */
+	public void pause() throws ArenaGamingException;
+
+	/**
+	 * Resumes the paused game.
+	 */
+	public void resume() throws ArenaGamingException;
+	
+	/**
+	 * Indicates the player is starting the game.
+	 */
+	public void starting() throws ArenaGamingException;
 
 }

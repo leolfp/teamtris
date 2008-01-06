@@ -105,6 +105,20 @@ public class RemoteArena extends Thread implements Arena {
 			// Wait for logged
 			Message logged = connection.read(MessageType.logged, new String[] {"id"});
 			thisPlayerRemoteId = logged.getInt("id");
+
+			connection.setInterceptor(MessageType.out, new MessageInterceptor(){
+				@Override
+				public boolean arrived(Message message) {
+					int id = message.getInt("id");
+					Player removed;
+					synchronized (playersMonitor) {
+						removed = playersById.remove(id);
+						players.remove(removed);
+					}
+					arenaObserver.notifyUnregisteredPlayer(removed);
+					return true;
+				}
+			});
 		} else {
 			throw new ProtocolException("Invalid server/version on welcome message: was '" +
 					welcome.getString("server") + "/" + welcome.getString("version") +
@@ -123,14 +137,6 @@ public class RemoteArena extends Thread implements Arena {
 						playersById.put(id, player);
 					}
 					arenaObserver.notifyRegisteredPlayer(player);
-				} else if(message.getType() == MessageType.out){
-					int id = message.getInt("id");
-					Player removed;
-					synchronized (playersMonitor) {
-						removed = playersById.remove(id);
-						players.remove(removed);
-					}
-					arenaObserver.notifyUnregisteredPlayer(removed);
 				} else if(message.getType() == MessageType.sorted){
 					int[] sortedIds = message.getIntArray("ids");
 					synchronized (playersMonitor) {
@@ -144,7 +150,7 @@ public class RemoteArena extends Thread implements Arena {
 					ScoringOptions scoring = new ScoringOptions(message.getInt("single"),
 							message.getInt("double"), message.getInt("triple"), message.getInt("quad"));
 					gameOptions = new GameOptions(message.getString("stream"), message.getInt("seed"),
-							message.getInt("level"), message.getInt("delay"), scoring);
+							message.getInt("level"), message.getInt("delay"), message.getBoolean("grow"), scoring);
 				} else if(message.getType() == MessageType.start){
 					remoteGame = new RemoteGame();
 					arenaObserver.notifyStartGame();
@@ -176,7 +182,7 @@ public class RemoteArena extends Thread implements Arena {
 			try {
 				if(message.getType() == MessageType.status){
 					if(message.getInt("id") == thisPlayerRemoteId){
-						arenaObserver.notifyStatus(new Status(-1, message.getInt("points"), message.getInt("lines")));
+						arenaObserver.notifyStatus(new Status(-1, message.getLong("points"), message.getInt("lines")));
 					} else {
 						arenaObserver.notifyHeight(playersById.get(message.getInt("id")), message.getInt("height"));
 					}
@@ -185,7 +191,7 @@ public class RemoteArena extends Thread implements Arena {
 				} else if(message.getType() == MessageType.paused){
 					arenaObserver.notifyPaused(playersById.get(message.getInt("id")));
 				} else if(message.getType() == MessageType.resumed){
-					arenaObserver.notifyResumed();
+					arenaObserver.notifyResumed(playersById.get(message.getInt("id")));
 				} else if(message.getType() == MessageType.finish){
 					winnerPlayerId = message.getInt("winner");
 					return;
@@ -205,12 +211,12 @@ public class RemoteArena extends Thread implements Arena {
 		for(int i = 0; i < players.size(); ++i){
 			Message status = connection.read(MessageType.status, new String[] {"id", "height", "points", "lines"});
 			statuses.put(playersById.get(status.getInt("id")),
-					new Status(status.getInt("height"), status.getInt("points"), status.getInt("lines")));
+					new Status(status.getInt("height"), status.getLong("points"), status.getInt("lines")));
 		}
 		
 		arenaObserver.notifyWinnerPlayer(playersById.get(winnerPlayerId), statuses);
 		
-		connection.read(MessageType.bye, null);
+		connection.read(MessageType.end, null);
 		this.remoteGame = null;
 	}
 	
@@ -261,6 +267,21 @@ public class RemoteArena extends Thread implements Arena {
 			status.setLines(lines);
 		}
 		
+		@Override
+		public void pause() throws ArenaGamingException {
+			write(ClientMessageFactory.pause());
+		}
+
+		@Override
+		public void resume() throws ArenaGamingException {
+			write(ClientMessageFactory.resume());
+		}
+
+		@Override
+		public void starting() throws ArenaGamingException {
+			write(ClientMessageFactory.starting());
+		}
+
 		private void write(Message message) throws ArenaGamingException {
 			try {
 				connection.write(message);

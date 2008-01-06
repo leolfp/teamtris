@@ -6,7 +6,7 @@ package net.sf.teamtris.arena;
  * @version 1.0
  * @created 31-dez-2007 14:02:05
  */
-public class Status {
+public class Status implements Comparable<Status> {
 
 	private int lines = 0;
 	private long points = 0;
@@ -25,7 +25,7 @@ public class Status {
 	/**
 	 * The default constructor for a game status, to be used on status propagation.
 	 */
-	public Status(int lines, int points, int totalBuiltLines){
+	public Status(int lines, long points, int totalBuiltLines){
 		this.lines = lines;
 		this.points = points;
 		this.totalBuiltLines = totalBuiltLines;
@@ -88,6 +88,21 @@ public class Status {
 		if(gameOptions != null){
 			this.lines = lines;
 		} else throw new UnsupportedOperationException("This status is not meant to be changed.");
+	}
+
+	@Override
+	public int compareTo(Status other) {
+		// Reverse order: the first, the winner
+		// -1 if this < other (this has more points than other)
+		// 0 if this == other
+		// 1 if this > other (this has less points than other)
+		
+		// Who made more points with less lines wins
+		if(((Long) this.points).compareTo(other.points) != 0){
+			return -((Long) this.points).compareTo(other.points);
+		} else {
+			return ((Integer) this.totalBuiltLines).compareTo(other.totalBuiltLines);
+		}
 	}
 	
 }

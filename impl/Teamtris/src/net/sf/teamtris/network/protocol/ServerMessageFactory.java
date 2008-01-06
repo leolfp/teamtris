@@ -24,10 +24,11 @@ public class ServerMessageFactory {
 		return message;
 	}
 
-	public static Message in(int id, String name){
+	public static Message in(int id, String name, String origin){
 		Message message = new Message(MessageType.in);
 		message.setInt("id", id);
 		message.setString("name", name);
+		message.setString("origin", origin);
 		return message;
 	}
 
@@ -74,20 +75,20 @@ public class ServerMessageFactory {
 		return message;
 	}
 	
-	public static Message statusOnBuilt(int id, int lines, int points){
+	public static Message statusOnBuilt(int id, int lines, long points){
 		Message message = new Message(MessageType.status);
 		message.setInt("id", id);
 		message.setInt("lines", lines);
-		message.setInt("points", points);
+		message.setLong("points", points);
 		return message;
 	}
 
-	public static Message statusOnFinish(int id, int height, int lines, int points){
+	public static Message statusOnFinish(int id, int height, int lines, long points){
 		Message message = new Message(MessageType.status);
 		message.setInt("id", id);
-		message.setInt("lines", lines);
-		message.setInt("points", points);
 		message.setInt("height", height);
+		message.setInt("lines", lines);
+		message.setLong("points", points);
 		return message;
 	}
 
