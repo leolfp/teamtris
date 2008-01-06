@@ -9,6 +9,9 @@ import java.util.Arrays;
  * @created 31-dez-2007 17:29:44
  */
 public enum MessageType {
+	// General purpose
+	talk(new String[]{"message"}),
+	talked(new String[]{"id", "message"}),
 
 	// Login phase
 	welcome(new String[]{"server", "version"}),

@@ -53,4 +53,9 @@ public interface Game {
 	 */
 	public void starting() throws ArenaGamingException;
 
+	/**
+	 * Sends a broadcast message for every player.
+	 */
+	public void talk(String message) throws ArenaGamingException;
+
 }

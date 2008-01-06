@@ -131,5 +131,12 @@ public class ServerMessageFactory {
 		message.setString("type", type);
 		return message;
 	}
+	
+	public static Message talked(int id, String messageStr){
+		Message message = new Message(MessageType.talked);
+		message.setInt("id", id);
+		message.setString("message", messageStr);
+		return message;
+	}
 
 }

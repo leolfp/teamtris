@@ -76,6 +76,15 @@ public class RemoteArena extends Thread implements Arena {
 	@Override
 	public void run() {
 		try {
+			connection.setInterceptor(MessageType.error, new MessageInterceptor(){
+				@Override
+				public boolean arrived(Message message) {
+					arenaObserver.notifyError(message.getString("type"));
+					Thread.currentThread().interrupt();
+					return false;
+				}
+			});
+
 			login();
 			while(!isInterrupted()){
 				if(!negotiation()){
@@ -116,6 +125,14 @@ public class RemoteArena extends Thread implements Arena {
 						players.remove(removed);
 					}
 					arenaObserver.notifyUnregisteredPlayer(removed);
+					return true;
+				}
+			});
+			
+			connection.setInterceptor(MessageType.talked, new MessageInterceptor(){
+				@Override
+				public boolean arrived(Message message) {
+					arenaObserver.notifyTalk(playersById.get(message.getInt("id")), message.getString("message"));
 					return true;
 				}
 			});
@@ -280,6 +297,11 @@ public class RemoteArena extends Thread implements Arena {
 		@Override
 		public void starting() throws ArenaGamingException {
 			write(ClientMessageFactory.starting());
+		}
+
+		@Override
+		public void talk(String message) throws ArenaGamingException {
+			write(ClientMessageFactory.talk(message));
 		}
 
 		private void write(Message message) throws ArenaGamingException {

@@ -85,4 +85,17 @@ public interface ArenaObserver {
 	 */
 	public void notifyStatus(Status status);
 
+	/**
+	 * Indicates that your received an error.
+	 * @param errorMessage The error type.
+	 */
+	public void notifyError(String errorMessage);
+
+	/**
+	 * Indicates that your received an error.
+	 * @param player The player who sents the message.
+	 * @param message The message.
+	 */
+	public void notifyTalk(Player player, String message);
+
 }
