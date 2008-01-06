@@ -166,7 +166,7 @@ public class RemoteArena extends Thread implements Arena {
 				} else if(message.getType() == MessageType.options){
 					ScoringOptions scoring = new ScoringOptions(message.getInt("single"),
 							message.getInt("double"), message.getInt("triple"), message.getInt("quad"));
-					gameOptions = new GameOptions(message.getString("stream"), message.getInt("seed"),
+					gameOptions = new GameOptions(message.getString("stream"), message.getLong("seed"),
 							message.getInt("level"), message.getInt("delay"), message.getBoolean("grow"), scoring);
 				} else if(message.getType() == MessageType.start){
 					remoteGame = new RemoteGame();

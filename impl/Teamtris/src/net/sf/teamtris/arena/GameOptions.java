@@ -8,7 +8,7 @@ package net.sf.teamtris.arena;
  */
 public class GameOptions {
 
-	private final int pieceStreamSeed;
+	private final long pieceStreamSeed;
 	private final String pieceStreamType;
 	private final ScoringOptions scoringOptions;
 	private final int levelChangePoints;
@@ -23,7 +23,7 @@ public class GameOptions {
 	 * @param growDelay The delay, in seconds, to wait before growing.
 	 * @param scoringOptions The detailed scoring options.
 	 */
-	public GameOptions(String pieceStreamType, int pieceStreamSeed, int levelChangePoints, int growDelay, boolean growingGame, ScoringOptions scoringOptions) {
+	public GameOptions(String pieceStreamType, long pieceStreamSeed, int levelChangePoints, int growDelay, boolean growingGame, ScoringOptions scoringOptions) {
 		this.pieceStreamType = pieceStreamType;
 		this.pieceStreamSeed = pieceStreamSeed;
 		this.levelChangePoints = levelChangePoints;
@@ -36,7 +36,7 @@ public class GameOptions {
 	 * Obtains the piece stream seed.
 	 * @return The piece stream seed.
 	 */
-	public int getPieceStreamSeed() {
+	public long getPieceStreamSeed() {
 		return pieceStreamSeed;
 	}
 	

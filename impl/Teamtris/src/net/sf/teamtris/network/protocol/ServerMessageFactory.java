@@ -44,10 +44,10 @@ public class ServerMessageFactory {
 		return message;
 	}
 
-	public static Message options(String stream, int seed, int level, int delay, int[] scoring){
+	public static Message options(String stream, long seed, int level, int delay, int[] scoring){
 		Message message = new Message(MessageType.options);
 		message.setString("stream", stream);
-		message.setInt("seed", seed);
+		message.setLong("seed", seed);
 		message.setInt("level", level);
 		message.setInt("delay", delay);
 		message.setInt("single", scoring[0]);
