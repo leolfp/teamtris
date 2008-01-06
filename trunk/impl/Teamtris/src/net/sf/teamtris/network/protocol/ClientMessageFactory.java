@@ -51,4 +51,10 @@ public class ClientMessageFactory {
 		return message;
 	}
 
+	public static Message talk(String messageStr){
+		Message message = new Message(MessageType.talk);
+		message.setString("message", messageStr);
+		return message;
+	}
+	
 }

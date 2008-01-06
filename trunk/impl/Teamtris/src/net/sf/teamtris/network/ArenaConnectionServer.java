@@ -124,6 +124,18 @@ public class ArenaConnectionServer extends Thread {
 		this.servedArena.registerPlayer(player, new ArenaObserverServer());
 		this.game = this.servedArena.getGame(player);
 		this.state = ConnectionState.NEGOTIATION;
+		
+		connection.setInterceptor(MessageType.talk, new MessageInterceptor(){
+			@Override
+			public boolean arrived(Message message) {
+				try {
+					ArenaConnectionServer.this.game.talk(message.getString("message"));
+				} catch (ArenaGamingException e) {
+					log.error("Arena failure.", e);
+				}
+				return true;
+			}
+		});
 	}
 
 	private boolean receiveMessage() throws ProtocolException, ParseException, IOException {
@@ -254,6 +266,16 @@ public class ArenaConnectionServer extends Thread {
 			
 		}
 
+		@Override
+		public void notifyError(String errorMessage) {
+			write(ServerMessageFactory.error(errorMessage));
+		}
+
+		@Override
+		public void notifyTalk(Player player, String message) {
+			write(ServerMessageFactory.talked(player.getId(), message));
+		}
+		
 		private void write(Message message) {
 			try {
 				connection.write(message);

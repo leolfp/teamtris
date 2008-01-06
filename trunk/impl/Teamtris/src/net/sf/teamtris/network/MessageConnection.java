@@ -89,7 +89,7 @@ public class MessageConnection {
 	 * @throws ParseException If there is an error parsing the received message.
 	 */
 	public Message read() throws ParseException, IOException {
-		for(;;){
+		while(!Thread.currentThread().isInterrupted()){
 			String bareMessage;
 			synchronized (reader) {
 				bareMessage = reader.readLine();
@@ -110,6 +110,7 @@ public class MessageConnection {
 				throw new IOException("End of input stream.");
 			}
 		}
+		throw new IOException("Interrupted read.");
 	}
 	
 	

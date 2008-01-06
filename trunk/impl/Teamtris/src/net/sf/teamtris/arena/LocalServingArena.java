@@ -280,6 +280,15 @@ public class LocalServingArena implements ServingArena {
 		}
 
 		@Override
+		public void talk(String message) throws ArenaGamingException {
+			synchronized (playersMonitor) {
+				for(Player playerToNotify : sortedPlayers){
+					observers.get(playerToNotify).notifyTalk(this.player, message);
+				}
+			}
+		}
+
+		@Override
 		public int compareTo(LocalGame other) {
 			return this.status.compareTo(other.status);
 		}
