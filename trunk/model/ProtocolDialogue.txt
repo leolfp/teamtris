@@ -1,7 +1,8 @@
 welcome server=Teamtris;version=0.1
 >login name=john
 logged id=5
-in id=11;name=mary;origin=200.19.149.56
+options stream=pentagram;seed=341298675;level=10000;delay=2;grow=true;single=100;double=300;triple=900;quad=1500
+in id=11;name=mary;origin=<local>
 in id=7;name=jack;origin=189.98.145.76
 in id=5;name=john;origin=60.12.45.73
 out id=7
@@ -9,10 +10,13 @@ in id=14;name=ann;origin=60.137.77.49
 sorted ids=11,14,5
 in id=1;name=thomas;origin=54.17.183.46
 sorted ids=14,11,1,5
-options stream=pentagram;seed=341298675;level=10000;delay=2;single=100;double=300;triple=900;quad=1500
+options stream=pentagram;seed=341298675;level=10000;delay=2;grow=true;single=100;double=300;triple=900;quad=1500
 sorted ids=14,1,5,11
 sorted ids=5,14,11,1
-options stream=classic;seed=5816323;level=5000;delay=3;single=100;double=300;triple=600;quad=1000
+>talk message=Change to classic, please...
+talked id=5;message=Change to classic, please...
+talked id=11;message=Ok!
+options stream=classic;seed=5816323;level=5000;delay=3;grow=true;single=100;double=300;triple=600;quad=1000
 start
 started id=11
 started id=14
