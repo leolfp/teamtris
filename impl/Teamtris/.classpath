@@ -9,10 +9,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="lib/thinlet.jar" sourcepath="D:/Bibliotecas/Java/thinlet2/src">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/D:/Bibliotecas/Java/thinlet2/doc/"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Thinlet"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

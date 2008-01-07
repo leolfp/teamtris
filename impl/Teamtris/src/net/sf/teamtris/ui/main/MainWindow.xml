@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-2"?>
+<pane>
+    <picture source="net/sf/teamtris/ui/main/Banner.png" />
+    <break/>
+    <pane>
+	    <pane>
+            <picture source="net/sf/teamtris/ui/main/Missing.png" />
+            <pane>
+                <anchor name="local">Play Local Game</anchor>
+                <break />
+                <inline>Play a local game with one or</inline>
+                <break />
+                <inline>two simultaneous players.</inline>
+            </pane>
+	    </pane>
+        <break/>
+
+        <pane>
+            <picture source="net/sf/teamtris/ui/main/Missing.png" />
+            <pane>
+                <anchor name="remote">Join Remote Game</anchor>
+                <break />
+                <inline>Enter a new remote game,</inline>
+                <break />
+                <inline>over network.</inline>
+            </pane>
+        </pane>
+        <break/>
+
+        <pane>
+            <picture source="net/sf/teamtris/ui/main/Missing.png" />
+            <pane>
+                <anchor name="serve">Serve Remote Game</anchor>
+                <break />
+                <inline>Create a new network game,</inline>
+                <break />
+                <inline>and invite your friends.</inline>
+            </pane>
+        </pane>
+        <break/>
+
+        <pane>
+            <picture source="net/sf/teamtris/ui/main/Missing.png" />
+            <pane>
+                <anchor name="options">Game Options</anchor>
+                <break />
+                <inline>Configure game profiles,</inline>
+                <break />
+                <inline>player and piece streams.</inline>
+            </pane>
+        </pane>
+        <break/>
+
+	    <separator/>
+        <break/>
+	    <pane>
+            <picture source="net/sf/teamtris/ui/main/Missing.png" />
+            <pane>
+                <anchor name="about">About</anchor>
+                <break />
+                <inline>Show game and environment</inline>
+                <break />
+                <inline>informations.</inline>
+            </pane>
+	    </pane>
+
+        <break/>
+        <pane>
+            <picture source="net/sf/teamtris/ui/main/Missing.png" />
+            <pane>
+                <anchor name="exit">Exit</anchor>
+                <break />
+                <inline>Exits Teamtris.</inline>
+            </pane>
+        </pane>
+    </pane>
+</pane>

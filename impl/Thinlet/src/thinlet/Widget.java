@@ -145,6 +145,7 @@ public class Widget implements Serializable {
 	
 	public Metrics getPreferredSize(int preferredWidth) {
 		if (layout == null) return new Metrics(0, 0);
+		if (constraint.getWidth() != -1) layout.getPreferredSize(this, constraint.getWidth());
 		return layout.getPreferredSize(this, preferredWidth);
 	}
 	
@@ -176,7 +177,7 @@ public class Widget implements Serializable {
 		}
 		else doLayout(); 
 	}
-
+	
 	protected int getX() { return x; }
 	protected int getY() { return y; }
 	protected int getWidth() { return width; }
