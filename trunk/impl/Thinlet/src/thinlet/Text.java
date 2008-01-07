@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class Text extends Widget {
 	
+	private static final long serialVersionUID = -5723064536667310477L;
+
 	private String text;
 	
 	public Text(String text) {

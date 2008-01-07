@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 public class ComboBox extends Widget {
 	
+	private static final long serialVersionUID = 7292627312623953739L;
+
 	private static final Layout layout = new InlineLayout(3, 6, 3, 16);
 	{ setLayout(layout); }
 	

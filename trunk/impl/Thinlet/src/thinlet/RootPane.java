@@ -6,6 +6,8 @@ import javax.swing.*;
 
 class RootPane extends Widget {
 
+	private static final long serialVersionUID = -330596422321792650L;
+
 	private static RootPane rootPane;
 	private Wrapper wrapper;
 	private transient Widget mouseinside, mousepressed;
@@ -72,6 +74,9 @@ class RootPane extends Widget {
 	
 	private class Wrapper extends JComponent  {
 		
+		private static final long serialVersionUID = 1748585701763965884L;
+
+
 		private Wrapper() {
 			enableEvents(AWTEvent.FOCUS_EVENT_MASK | AWTEvent.KEY_EVENT_MASK |
 				AWTEvent.MOUSE_EVENT_MASK | AWTEvent.MOUSE_MOTION_EVENT_MASK |

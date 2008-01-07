@@ -10,6 +10,8 @@ import java.util.*;
 
 public class DateField extends Widget {
 	
+	private static final long serialVersionUID = 3978778406240594096L;
+
 	private static final Layout layout = new InlineLayout(3, 6, 3, 16);
 	{ setLayout(layout); }
 	static { Locale.setDefault(new Locale("HU", "hu")); }
@@ -55,6 +57,8 @@ public class DateField extends Widget {
 	}
 	
 	private class DateChoice extends Widget {
+		
+		private static final long serialVersionUID = 2410567491932575405L;
 		
 		private Text tyear, tmonth;
 		

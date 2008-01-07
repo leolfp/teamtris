@@ -9,6 +9,8 @@ import java.net.*;
 
 public class Picture extends Widget implements ImageObserver {
 	
+	private static final long serialVersionUID = 1116846171024451448L;
+
 	private static final Constraint constraint = new Constraint();
 	static { constraint.setVerticalAlignment(Constraint.MIDDLE); }
 	{ setConstraint(constraint); }

@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 public class Slider extends Widget {
 	
+	private static final long serialVersionUID = 2641302675353281632L;
+
 	private int minimum;
 	private int maximum = 100;
 	private int value;

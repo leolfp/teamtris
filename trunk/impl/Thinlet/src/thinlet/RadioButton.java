@@ -5,6 +5,8 @@ import java.awt.image.*;
 
 public class RadioButton extends CheckBox {
 	
+	private static final long serialVersionUID = 456064500964612886L;
+
 	private static final Layout layout = new InlineLayout(0, 16, 0, 0);
 	{ setLayout(layout); }
 	

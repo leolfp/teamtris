@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 public class TabbedPane extends Widget {
 	
+	private static final long serialVersionUID = 709753664349055149L;
+
 	private Widget tabs;
 	private Tab selected;
 	
@@ -75,6 +77,8 @@ public class TabbedPane extends Widget {
 
 	public class Tab extends Widget {
 		
+		private static final long serialVersionUID = -8714042082877144859L;
+
 		{ setLayout(layout); }
 		
 		

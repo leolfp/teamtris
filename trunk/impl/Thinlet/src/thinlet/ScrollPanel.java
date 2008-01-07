@@ -6,6 +6,8 @@ import javax.swing.*;
 
 public class ScrollPanel extends Widget {
 	
+	private static final long serialVersionUID = -3991136283579697683L;
+
 	private Widget headerport, header;
 	private Widget viewport, content;
 	private Widget hscroll, left, hknob, right;

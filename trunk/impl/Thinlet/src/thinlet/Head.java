@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class Head extends Widget {
 	
+	private static final long serialVersionUID = -3088197239060985892L;
+
 	public Head() {
 	}
 	

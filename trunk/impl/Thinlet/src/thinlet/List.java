@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 public class List extends ScrollPanel {
 	
+	private static final long serialVersionUID = 5819553192462343848L;
+
 	public List() {
 		for (int i = 0; i < 8; i++) {
 			Row row = new Row();

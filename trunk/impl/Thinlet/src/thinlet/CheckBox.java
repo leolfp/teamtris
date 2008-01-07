@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 public class CheckBox extends Widget {
 	
+	private static final long serialVersionUID = -9104126953114171139L;
+
 	private static final Layout layout = new InlineLayout(0, 18, 0, 0);
 	{ setLayout(layout); }
 	

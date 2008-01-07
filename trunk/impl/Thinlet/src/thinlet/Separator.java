@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class Separator extends Widget {
 	
+	private static final long serialVersionUID = 4052967915798568280L;
+
 	public Separator() {
 	}
 	
