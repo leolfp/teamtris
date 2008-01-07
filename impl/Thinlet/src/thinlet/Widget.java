@@ -1,14 +1,28 @@
 package thinlet;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import javax.swing.*;
+import java.awt.AWTEvent;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import javax.swing.Timer;
 
 
 
 
 public class Widget implements Serializable {
+	
+	private static final long serialVersionUID = 1635555118910409538L;
 	
 	private Widget parent, next, child;
 	private transient int x, y, width, height;
@@ -17,7 +31,35 @@ public class Widget implements Serializable {
 	private transient Constraint constraint;
 	private transient Painter painter;
 	
+	private String name;
+	
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	public String getName(){
+		return this.name;
+	}
+
+	// Only used for the root parsed widget
+	private transient Map<String, Widget> namedChilds = new HashMap<String, Widget>(); 
+
+	void addNamedChild(Widget widget){
+		if(widget.getName() != null){
+			namedChilds.put(widget.getName(), widget);
+		}
+	}
+
+	public Widget findByName(String name){
+		return namedChilds.get(name);
+	}
+	
+	public Set<String> getChildNames(){
+		return namedChilds.keySet();
+	}
+	
 	public Widget add(Widget widget) {
+		addNamedChild(widget);
 		if (widget.parent != null) widget.remove();
 		if (child == null) {
 			child = widget;
@@ -31,6 +73,7 @@ public class Widget implements Serializable {
 	}
 	
 	public void append(Widget widget) {
+		addNamedChild(widget);
 		if (widget.parent != null) widget.remove();
 		widget.next = next; next = widget;
 		widget.parent = parent;
@@ -56,7 +99,9 @@ public class Widget implements Serializable {
 	
 	public void removeAll() {
 		if (child != null) {
-			for (Widget w = child; w != null; w = w.next) w.parent = null;
+			for (Widget w = child; w != null; w = w.next){
+				w.parent = null;
+			}
 			child = null;
 		}
 	}

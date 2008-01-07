@@ -6,6 +6,8 @@ import java.awt.event.*;
 
 public class TextField extends Widget {
 	
+	private static final long serialVersionUID = -3505714125551040331L;
+
 	private static final Insets is = new Insets(2, 4, 2, 4);
 	
 	private String text;

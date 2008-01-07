@@ -5,6 +5,8 @@ package thinlet;
 
 public class Tree extends ScrollPanel {
 
+	private static final long serialVersionUID = 8532991262865017652L;
+
 	public Tree() {
 		for (int i = 1; i <= 3; i++) addNode(createNode(0, "Node", i));
 	}

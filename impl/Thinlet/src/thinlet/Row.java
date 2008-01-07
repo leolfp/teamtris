@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 public class Row extends Widget {
 	
+	private static final long serialVersionUID = 119017337127715521L;
+
 	private static final Layout layout = new InlineLayout(2, 2, 3, 2);
 	{ setLayout(layout); }
 	

@@ -11,10 +11,11 @@ public class Parser extends DefaultHandler {
 	
 	private int level;
 	private Widget widget;
+	private final Widget root;
 	private ArrayList<Widget> path;
 	
 	public Parser(Widget widget, String resource) throws Exception {
-		this.widget = widget;
+		this.widget = this.root = widget;
 		path = new ArrayList<Widget>();
 		parse(resource);
 	}
@@ -67,6 +68,7 @@ public class Parser extends DefaultHandler {
 	}
 	
 	private void endElement() {
+		this.root.addNamedChild(widget);
 		int n = path.size();
 		if (n == 1) path = null;
 		else {

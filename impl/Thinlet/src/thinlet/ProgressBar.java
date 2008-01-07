@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class ProgressBar extends Widget {
 	
+	private static final long serialVersionUID = 2957828070600078906L;
+
 	private int minimum;
 	private int maximum = 100;
 	private int value = 33;

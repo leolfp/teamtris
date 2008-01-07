@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 public class MenuItem extends Widget {
 	
+	private static final long serialVersionUID = 5091234117217330765L;
+
 	private static final Layout layout = new InlineLayout(2, 6, 2, 6);
 	{ setLayout(layout); }
 

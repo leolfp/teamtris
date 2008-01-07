@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class MenuBar extends Widget {
 	
+	private static final long serialVersionUID = 8138740127981660126L;
+
 	private static final Layout layout = new InlineLayout(0, 0, 1, 0);
 	{ setLayout(layout); }
 	

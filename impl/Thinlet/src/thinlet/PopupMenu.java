@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 public class PopupMenu extends Widget {
 
+	private static final long serialVersionUID = 7431025938727560870L;
+
 	public static final int POPUP_CLOSED = ActionEvent.ACTION_LAST + 1;
 	private transient Widget selected;
 	private Widget invoker;

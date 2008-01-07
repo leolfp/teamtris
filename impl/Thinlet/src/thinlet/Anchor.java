@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 public class Anchor extends Widget {
 	
+	private static final long serialVersionUID = -6389192068806123017L;
+
 	private static final Layout layout = new InlineLayout();
 	{ setLayout(layout); }
 	

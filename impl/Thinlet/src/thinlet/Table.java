@@ -2,6 +2,8 @@ package thinlet;
 
 public class Table extends ScrollPanel {
 	
+	private static final long serialVersionUID = 8128528475958311641L;
+
 	public Table() {
 		addHeader(new Head("Text"));
 		addHeader(new Head("Check"));

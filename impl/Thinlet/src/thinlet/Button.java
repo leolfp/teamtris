@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 public class Button extends Widget {
 	
+	private static final long serialVersionUID = -7087677706899102798L;
+
 	private static final Layout layout = new InlineLayout(3, 9, 3, 9);
 	{ setLayout(layout); }
 	

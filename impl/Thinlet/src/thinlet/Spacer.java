@@ -2,6 +2,8 @@ package thinlet;
 
 public class Spacer extends Widget {
 	
+	private static final long serialVersionUID = 6149039113890612306L;
+
 	private int width;
 	
 	public Spacer() {
