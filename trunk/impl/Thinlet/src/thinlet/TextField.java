@@ -15,10 +15,20 @@ public class TextField extends Widget {
 	private boolean editable = true;
 	private int size = 96;
 	
+	private Listener actionListener;
+	
 	public TextField() {
 		text = "";
 	}
 
+	public void addActionListener(Listener listener) {
+		actionListener = Listener.add(actionListener, listener);
+	}
+	
+	public void removeActionListener(Listener listener) {
+		actionListener = Listener.remove(actionListener, listener);
+	}
+	
 	@Override
 	public String getText() {
 		return text;
@@ -27,7 +37,7 @@ public class TextField extends Widget {
 	@Override
 	public void setText(String text){
 		this.text = text;
-		this.repaint();
+		select(text.length(), text.length());
 	}
 	
 	public Metrics getPreferredSize(int preferredWidth) {
@@ -66,7 +76,7 @@ public class TextField extends Widget {
 			int code = ke.getKeyCode();
 			char keychar = ke.getKeyChar();
 			if (code == KeyEvent.VK_ENTER) {
-				
+				Listener.invoke(actionListener);
 			}
 			else if (code == KeyEvent.VK_HOME) {
 				select(ke.isShiftDown() ? start : 0, 0);
