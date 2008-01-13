@@ -5,33 +5,67 @@ public class Table extends ScrollPanel {
 	private static final long serialVersionUID = 8128528475958311641L;
 
 	public Table() {
-		addHeader(new Head("Text"));
-		addHeader(new Head("Check"));
-		addHeader(new Head("Slider"));
-		for (int i = 1; i <= 6; i++) {
-			Row row = new Row(); row.setLayout(null);
-			row.add(new Text("Label-" + i));
-			CheckBox checkBox = new CheckBox(); checkBox.add(new Text("Check-" + i));
-			row.add(checkBox);
-			row.add(new Slider());
-			addRow(row);
+	}
+	
+	@Override
+	public Widget add(Widget widget) {
+		if(widget instanceof Head){
+			return getHeader().add(widget);
+		} else {
+			return getContent().add(widget);
 		}
 	}
 	
-	public void addHeader(Widget widget) {
-		getHeader().add(widget);
+	@Override
+	public void append(Widget widget) {
+		if(widget instanceof Head){
+			getHeader().append(widget);
+		} else {
+			getContent().append(widget);
+		}
+	}
+
+	public void preppendChild(Row row) {
+		getContent().preppendChild(row);
+		refresh();
+	}
+
+	public void appendChild(Row row) {
+		add(row);
+		refresh();
+	}
+
+	public void removeChild(Row row) {
+		row.remove();
+		refresh();
 	}
 	
-	public void addRow(Widget widget) {
-		getContent().add(widget);
+	private int width;
+	private int height;
+	
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
 	}
 	
 	public Metrics getPreferredSize(int preferredWidth) {
-		return new Metrics(256, 96);
+		return new Metrics(width, height);
 	}
 	
 	protected Metrics layoutContent(int preferredWidth) {
 		int ncol = 0, nrow = 0;
+		
 		for (Widget widget = getContent().getChild(); widget != null; widget = widget.getNext()) {
 			if (widget instanceof Row) {
 				int cols = 0;
@@ -42,17 +76,42 @@ public class Table extends ScrollPanel {
 			}
 			nrow++;
 		}
+		for (Widget widget = getHeader().getChild(); widget != null; widget = widget.getNext()) {
+			if (widget instanceof Head) {
+				int cols = 0;
+				for (Widget item = widget.getChild(); item != null; item = item.getNext()) {
+					cols++;
+				}
+				ncol = Math.max(ncol, cols);
+			}
+		}
+		
+		int[] widths = new int[ncol];
+		int i = 0;
+		for (Widget widget = getHeader().getChild(); widget != null; widget = widget.getNext()) {
+			if (widget instanceof Head) {
+				widths[i] = widget.getWidth();
+				++i;
+			}
+		}
+		for(;i < widths.length; ++i){
+			widths[i] = 80;
+		}
 		
 		int x = 0, y = 0;
 		for (Widget widget = getContent().getChild(); widget != null; widget = widget.getNext()) {
-			widget.setBounds(0, 18 * y, preferredWidth, 18); y++;
+			widget.setBounds(0, 18 * y, getWidth(), 18); y++;
 			if (widget instanceof Row) {
 				x = 0;
+				int scale = 0;
 				for (Widget item = widget.getChild(); item != null; item = item.getNext()) {
-					item.setBounds(80 * x, 0, 80, 18); x++;
+					item.setBounds(scale, 0, widths[x], 18);
+					scale += widths[x];
+					x++;
 				}
 			}
 		}
-		return new Metrics(preferredWidth, nrow * 18);
+		return new Metrics(getWidth(), nrow * 18);
 	}
+
 }

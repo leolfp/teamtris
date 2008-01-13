@@ -63,6 +63,8 @@ public class Parser extends DefaultHandler {
 			value = svalue;
 		} else if ((type == Integer.TYPE) || ((type == Integer.class))) {
 			value = Integer.valueOf(svalue);
+		} else if ((type == Boolean.TYPE) || ((type == Boolean.class))) {
+			value = "true".equalsIgnoreCase(svalue);
 		} else throw new IllegalArgumentException(type.getName());
 		try {
 			

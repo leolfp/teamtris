@@ -13,15 +13,35 @@ public class TextField extends Widget {
 	private String text;
 	private int start, end, offset;
 	private boolean editable = true;
+	private int size = 96;
 	
 	public TextField() {
-		text = "text field";
+		text = "";
+	}
+
+	@Override
+	public String getText() {
+		return text;
+	}
+	
+	@Override
+	public void setText(String text){
+		this.text = text;
+		this.repaint();
 	}
 	
 	public Metrics getPreferredSize(int preferredWidth) {
 		FontMetrics fm = RootPane.getFontMetrics();
-		return new Metrics(96, fm.getAscent() + fm.getDescent() + is.top + is.bottom,
+		return new Metrics(size, fm.getAscent() + fm.getDescent() + is.top + is.bottom,
 			fm.getAscent() + is.top);
+	}
+	
+	public void setSize(int size){
+		this.size = size;
+	}
+	
+	public int getSize(){
+		return this.size;
 	}
 	
 	protected void process(AWTEvent e) {

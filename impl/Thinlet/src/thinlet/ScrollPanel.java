@@ -18,6 +18,24 @@ public class ScrollPanel extends Widget {
 		viewport.add(content = new Widget());
 	}
 	
+	private boolean showVScroll = true, showHScroll = true;
+	
+	public boolean isShowVScroll() {
+		return showVScroll;
+	}
+
+	public void setShowVScroll(boolean showVScroll) {
+		this.showVScroll = showVScroll;
+	}
+
+	public boolean isShowHScroll() {
+		return showHScroll;
+	}
+
+	public void setShowHScroll(boolean showHScroll) {
+		this.showHScroll = showHScroll;
+	}
+	
 	protected Widget getHeader() {
 		if (header == null) {
 			super.add(headerport = new Widget());
@@ -41,7 +59,7 @@ public class ScrollPanel extends Widget {
 			header.setBounds(0, 0, getWidth() - 16, 16);
 			int x = 0;
 			for (Widget widget = header.getChild(); widget != null; widget = widget.getNext()) {
-				widget.setBounds(x, 0, 80, 16); x += 80;
+				widget.setBounds(x, 0, widget.getWidth(), 16); x += widget.getWidth();
 			}
 			headerheight = 16;
 		}
@@ -101,7 +119,7 @@ public class ScrollPanel extends Widget {
 				k = Math.max(t * v / c, 10);
 			hknob.setBounds(16 + content.getX() * (t - k) / (v - c), 0, k, 16);
 			hscroll.repaint(); 
-		} else {
+		} else if(vscroll != null) {
 			int t = vscroll.getHeight() - 32, v = viewport.getHeight(), c = content.getHeight(),
 				k = Math.max(t * v / c, 10);
 			vknob.setBounds(0, 16 + content.getY() * (t - k) / (v - c), 16, k);
@@ -185,11 +203,12 @@ public class ScrollPanel extends Widget {
 		dark = new Color(0xd0d0d0), border = new Color(0xc0c0c0);
 	
 	protected void paint(Graphics g, Widget widget) {
-		if ((widget == hscroll) || (widget == vscroll)) {
+		if ((widget == hscroll && showHScroll) || (widget == vscroll && showVScroll)) {
 			g.setColor(light);
 			g.fillRect(0, 0, widget.getWidth(), widget.getHeight());
 		}
-		else if ((widget == left) || (widget == right) || (widget == up) || (widget == down)) {
+		else if ((widget == left && showHScroll) || (widget == right && showHScroll) ||
+				(widget == up && showVScroll) || (widget == down && showVScroll)) {
 			if (widget.isMouseInside() || widget.isPressedInside()) {
 				g.setColor(widget.isPressedInside() ? dark : light);
 				g.fillRect(1, 1, 14, 14);
@@ -198,12 +217,12 @@ public class ScrollPanel extends Widget {
 			}
 			
 			g.setColor(Color.gray);
-			if (widget == left) g.fillPolygon(new int [] { 12, 4, 12 }, new int [] { 4, 8, 12 }, 3);
-				else if (widget == right) g.fillPolygon(new int [] { 4, 12, 4 }, new int [] { 4, 8, 12 }, 3);
-				else if (widget == up) g.fillPolygon(new int [] { 4, 8, 12 }, new int [] { 12, 4, 12 }, 3);
-				else if (widget == down) g.fillPolygon(new int [] { 4, 8, 12 }, new int [] { 4, 12, 4 }, 3);
+			if (widget == left && showHScroll) g.fillPolygon(new int [] { 12, 4, 12 }, new int [] { 4, 8, 12 }, 3);
+				else if (widget == right && showHScroll) g.fillPolygon(new int [] { 4, 12, 4 }, new int [] { 4, 8, 12 }, 3);
+				else if (widget == up && showVScroll) g.fillPolygon(new int [] { 4, 8, 12 }, new int [] { 12, 4, 12 }, 3);
+				else if (widget == down && showVScroll) g.fillPolygon(new int [] { 4, 8, 12 }, new int [] { 4, 12, 4 }, 3);
 		}
-		else if ((widget == hknob) || (widget == vknob)) {
+		else if ((widget == hknob && showHScroll) || (widget == vknob && showVScroll)) {
 			g.setColor(widget.isPressedInside() ? dark : light);
 			g.fillRect(1, 1, widget.getWidth() - 2, widget.getHeight() - 2);
 			g.setColor(border);

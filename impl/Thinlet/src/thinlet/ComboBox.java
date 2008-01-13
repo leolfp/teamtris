@@ -40,8 +40,10 @@ public class ComboBox extends Widget {
 		case PopupMenu.POPUP_CLOSED: 
 			repaint();
 			break;
-		case MenuItem.ITEM_SELECTED: 
-			System.out.println(e.getSource());
+		case MenuItem.ITEM_SELECTED:
+			MenuItem menuItem = (MenuItem) e.getSource();
+			this.setText(menuItem.getText());
+			revalidate();
 		}
 	}
 	

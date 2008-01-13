@@ -37,7 +37,7 @@ public class Listener {
 		for (Listener listener = first; listener != null; listener = listener.next) {
 			try {
 				listener.invoke();
-			} catch (Exception exc) { throw new IllegalArgumentException(exc.getMessage()); }
+			} catch (Exception exc) { throw new IllegalArgumentException(exc.getMessage(), exc); }
 		}
 	}
 }

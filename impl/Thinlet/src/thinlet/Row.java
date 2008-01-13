@@ -24,6 +24,11 @@ public class Row extends Widget {
 		}
 	}
 	
+	@Override
+	protected int getWidth() {
+		return super.getWidth() - 16;
+	}
+	
 	protected void paint(Graphics g) {
 		g.setColor(new Color(0xeeeeee));
 		g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
