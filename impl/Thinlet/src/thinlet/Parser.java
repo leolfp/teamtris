@@ -75,7 +75,7 @@ public class Parser extends DefaultHandler {
 	}
 	
 	private void characters(String text) {
-		if (!inConstraint && text.trim().length() > 0) widget.add(new Text(text));
+		if (!inConstraint && text.trim().length() > 0) widget.setText(text.trim());
 	}
 	
 	private void endElement() {
