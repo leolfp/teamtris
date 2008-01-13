@@ -14,6 +14,16 @@ public class Head extends Widget {
 		add(new Text(text));
 	}
 	
+	private int width = 80;
+	
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+	
 	protected void paint(Graphics g) {
 		g.setColor(new Color(0x91a0c0));
 		g.drawLine(0, 0, getWidth() - 1, 0);

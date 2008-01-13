@@ -25,6 +25,7 @@ public class Widget implements Serializable {
 	private static final long serialVersionUID = 1635555118910409538L;
 	
 	private Widget parent, next, child;
+	private Text text;
 	private transient int x, y, width, height;
 	
 	private transient Layout layout;
@@ -39,6 +40,27 @@ public class Widget implements Serializable {
 	
 	public String getName(){
 		return this.name;
+	}
+	
+	public void setText(String text){
+		if(this.text == null){
+			this.add(new Text(text));
+		} else {
+			this.text.setText(text);
+		}
+	}
+	
+	public String getText(){
+		if(this.text != null){
+			return this.text.getText();
+		} else {
+			return "";
+		}
+	}
+	
+	public void refresh(){
+		doLayout();
+		repaint();
 	}
 
 	// Only used for the root parsed widget
@@ -60,6 +82,9 @@ public class Widget implements Serializable {
 	
 	public Widget add(Widget widget) {
 		addNamedChild(widget);
+		if(widget instanceof Text){
+			this.text = (Text) widget;
+		}
 		if (widget.parent != null) widget.remove();
 		if (child == null) {
 			child = widget;
@@ -71,9 +96,25 @@ public class Widget implements Serializable {
 		widget.added();
 		return this;
 	}
+
+	public Widget preppendChild(Widget widget) {
+		addNamedChild(widget);
+		if(widget instanceof Text){
+			this.text = (Text) widget;
+		}
+		if (widget.parent != null) widget.remove();
+		widget.next = child;
+		child = widget;
+		widget.parent = this;
+		widget.added();
+		return this;
+	}
 	
 	public void append(Widget widget) {
 		addNamedChild(widget);
+		if(widget instanceof Text){
+			this.text = (Text) widget;
+		}
 		if (widget.parent != null) widget.remove();
 		widget.next = next; next = widget;
 		widget.parent = parent;
