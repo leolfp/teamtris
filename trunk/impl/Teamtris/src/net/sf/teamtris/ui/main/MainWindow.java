@@ -1,6 +1,10 @@
 package net.sf.teamtris.ui.main;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import net.sf.teamtris.ui.TeamtrisWindow;
+import net.sf.teamtris.ui.serve.ServeGameWindow;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,6 +22,8 @@ public class MainWindow extends TeamtrisWindow {
 	private static final Log log = LogFactory.getLog(MainWindow.class);
 	
 	private static final long serialVersionUID = -1084862959456009478L;
+	
+	private ServeGameWindow serveGameWindow;
 	
 	public MainWindow(){
 		super(null, "net/sf/teamtris/ui/main/MainWindow.xml", 275, 600);
@@ -39,6 +45,17 @@ public class MainWindow extends TeamtrisWindow {
 
 	public void serveClicked(){
 		log.debug("Serve clicked.");
+		this.setVisible(false);
+		if(serveGameWindow == null){
+			serveGameWindow = new ServeGameWindow();
+			serveGameWindow.addWindowListener(new WindowAdapter(){
+				@Override
+				public void windowClosing(WindowEvent e) {
+					setVisible(true);
+				}
+			});
+		}
+		serveGameWindow.setVisible(true);
 	}
 
 	public void optionsClicked(){

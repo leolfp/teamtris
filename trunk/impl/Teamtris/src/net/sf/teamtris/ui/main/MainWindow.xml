@@ -3,7 +3,7 @@
     <picture source="net/sf/teamtris/ui/main/Banner.png" />
     <break/>
     <pane>
-	    <pane>
+        <pane>
             <picture source="net/sf/teamtris/ui/main/Missing.png" />
             <pane>
                 <anchor name="local">Play Local Game</anchor>
@@ -12,7 +12,7 @@
                 <break />
                 <inline>two simultaneous players.</inline>
             </pane>
-	    </pane>
+        </pane>
         <break/>
 
         <pane>
@@ -51,9 +51,9 @@
         </pane>
         <break/>
 
-	    <separator/>
+        <separator/>
         <break/>
-	    <pane>
+        <pane>
             <picture source="net/sf/teamtris/ui/main/Missing.png" />
             <pane>
                 <anchor name="about">About</anchor>
@@ -62,7 +62,7 @@
                 <break />
                 <inline>informations.</inline>
             </pane>
-	    </pane>
+        </pane>
 
         <break/>
         <pane>

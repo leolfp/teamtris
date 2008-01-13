@@ -45,4 +45,9 @@ public abstract class TeamtrisWindow extends JFrame {
 		this.setSize(width, height);
 		this.setResizable(false);
 	}
+	
+	@Override
+	public void setTitle(String subtitle) {
+		super.setTitle("Teamtris v" + ProtocolConfiguration.VERSION + (subtitle != null ? " - " + subtitle : ""));
+	}
 }
