@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+<row>
+    <label name="name" />
+    <label name="location" />
+    <label name="started" />
+    <anchor name="kill" />
+</row>

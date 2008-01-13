@@ -33,12 +33,11 @@ public class Player {
 	/**
 	 * The default player constructor, for local players.
 	 * @param name Player's name.
-	 * @param id Player's id.
 	 */
-	public Player(String name, int id){
+	public Player(String name){
 		this.name = name;
 		this.origin = LOCAL_ORIGIN;
-		this.id = id;
+		this.id = idGenerator.incrementAndGet();
 		this.type = "local";
 	}
 

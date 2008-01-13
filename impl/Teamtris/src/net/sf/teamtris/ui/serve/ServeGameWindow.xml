@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+<pane>
+    <pane>
+    <pane>
+        <label>Game Profile:</label>
+        <comboBox name="gameProfile">Tetris Classic
+        <popupMenu>
+            <menuItem>Tetris Classic</menuItem>
+            <menuItem>Hard Tetris</menuItem>
+        </popupMenu></comboBox>
+        <button name="copy">Copy</button>
+        <button name="save">Save</button>
+    </pane>
+    <break />
+    <separator/>
+    <break/>
+    <pane>
+	    <group>
+	        <group>
+		        <label>Pieces:</label>
+		        <comboBox name="gamePieces" text="Classic">
+		        <popupMenu>
+		            <menuItem>Classic</menuItem>
+		            <menuItem>Pentamino</menuItem>
+		        </popupMenu></comboBox>
+	        </group>
+	        <break />
+	        <picture source="net/sf/teamtris/ui/serve/Missing.png" />
+	    </group>
+	    <spacer width="7" />
+	    <group>
+	        <group>
+	            <label>Grow delay:</label>
+	            <textField name="growDelay" size="60" />
+	            <break />
+	            <label>Level score:</label>
+	            <textField name="levelScore" size="60" />
+	        </group>
+	        <break />
+	        <label bold="true">Points for lines:</label>
+	        <break />
+	        <group>
+	           <spacer width="39" />
+	           <group>
+    	           <label>Single:</label>
+		           <textField name="points1" size="40" />
+		           <break />
+		           <label>Double:</label>
+		           <textField name="points2" size="40" />
+		           <break />
+		           <label>Triple:</label>
+		           <textField name="points3" size="40" />
+		           <break />
+		           <label>Quad:</label>
+		           <textField name="points4" size="40" />
+               </group>
+	        </group>
+	    </group>
+    </pane>
+    <break />
+    <separator/>
+    <break/>
+    <pane>
+        <label bold="true">Players:</label>
+        <break />
+        <group>
+            <spacer width="8" />
+	        <table width="286" height="60" name="players" showHScroll="false">
+	            <head width="100">Name</head>
+	            <head width="70">Origin</head>
+	            <head width="50">Status</head>
+                <head width="50">Action</head>
+	            <row>
+	                <label name="name" />
+	                <label name="location" />
+                    <label name="started" />
+	                <label />
+	            </row>
+	        </table>
+        </group>
+        <break />
+        <group>
+            <label name="order" />
+        </group>
+    </pane>
+    <break />
+    <separator/>
+    <break/>
+    <pane>
+        <label bold="true">Messages:</label>
+        <break />
+        <group>
+            <spacer width="8" />
+            <table width="286" height="100" name="messages" showHScroll="false">
+                <head width="60">Player</head>
+                <head width="210">Message</head>
+                <row>
+                    <label>INFO</label>
+                    <label>Send your broadcast message here!</label>
+                </row>
+            </table>
+        </group>
+        <break />
+        <group>
+            <textField name="inputMessage" size="245"/>
+            <button name="send">Send</button>
+        </group>
+    </pane>
+    <break />
+    <separator/>
+    <break/>
+    <pane>
+        <spacer width="100" />
+        <button name="resort">Resort</button>
+        <button name="start">Start</button>
+        <button name="serveOrCancel">Serve Game</button>
+    </pane>
+    </pane>
+</pane>
