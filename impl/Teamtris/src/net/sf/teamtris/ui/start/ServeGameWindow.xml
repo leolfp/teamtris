@@ -25,7 +25,7 @@
 		        </popupMenu></comboBox>
 	        </group>
 	        <break />
-	        <picture source="net/sf/teamtris/ui/serve/Missing.png" />
+	        <picture source="net/sf/teamtris/ui/start/Missing.png" />
 	    </group>
 	    <spacer width="7" />
 	    <group>
