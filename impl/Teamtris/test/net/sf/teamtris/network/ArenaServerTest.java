@@ -16,7 +16,7 @@ public class ArenaServerTest {
 
 	@BeforeClass
 	public static void globalSetUp(){
-		arena = ArenaManager.getServingArena();
+		arena = ArenaManager.createServingArena();
 		assertNotNull("Arena null", arena);
 	}
 	

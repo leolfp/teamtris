@@ -9,11 +9,10 @@ package net.sf.teamtris.arena;
 public class ArenaManager {
 
 	/**
-	 * Obtains a local serving arena.
-	 * @return The singleton instance of local serving arena.
+	 * Obtains a local serving arena. This is a factory method.
+	 * @return The created instance of local serving arena.
 	 */
-	public static ServingArena getServingArena(){
-		// TODO Implement this!
+	public static ServingArena createServingArena(){
 		return new LocalServingArena();
 	}
 
