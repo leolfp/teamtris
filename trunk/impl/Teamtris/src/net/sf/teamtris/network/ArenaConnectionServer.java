@@ -36,6 +36,8 @@ public class ArenaConnectionServer extends Thread {
 	private final ServingArena servedArena;
 	private final String connectionId;
 	
+	private volatile boolean closing;
+	
 	private Player player;
 
 	private enum ConnectionState {
@@ -74,6 +76,17 @@ public class ArenaConnectionServer extends Thread {
 	}
 	
 	/**
+	 * Closes the current arena server, killing the other player.
+	 */
+	public void close(){
+		if(isAlive()){
+			this.closing = true;
+			interrupt();
+			connection.close();
+		}
+	}
+	
+	/**
 	 * The default constructor for an arena connection server.
 	 * @param connection The game connection.
 	 * @param servedArena The arena to be served.
@@ -104,7 +117,9 @@ public class ArenaConnectionServer extends Thread {
 				log.fatal("Parse error serving game on " + connectionId + ".", e);
 			}
 		} catch (IOException e) {
-			log.fatal("IO error serving game on " + connectionId + ".", e);
+			if(!closing){
+				log.fatal("IO error serving game on " + connectionId + ".", e);
+			}
 		} finally {
 			if(player != null){
 				this.servedArena.unregisterPlayer(player);

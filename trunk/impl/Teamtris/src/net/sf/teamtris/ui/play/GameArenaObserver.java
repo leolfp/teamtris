@@ -1,4 +1,4 @@
-package net.sf.teamtris.ui.start;
+package net.sf.teamtris.ui.play;
 
 import java.util.List;
 import java.util.Map;
@@ -7,13 +7,14 @@ import net.sf.teamtris.arena.ArenaObserver;
 import net.sf.teamtris.arena.GameOptions;
 import net.sf.teamtris.arena.Player;
 import net.sf.teamtris.arena.Status;
+import net.sf.teamtris.ui.start.StartGameUI;
 
-public class ServeGameArenaObserver implements ArenaObserver {
+public class GameArenaObserver implements ArenaObserver {
 	
-	private final ServeGameUI serveGameUI;
+	private final StartGameUI serveGameUI;
 	private GameUI gameUI;
 	
-	public ServeGameArenaObserver(ServeGameUI serveGameUI){
+	public GameArenaObserver(StartGameUI serveGameUI){
 		this.serveGameUI = serveGameUI;
 	}
 	
@@ -28,7 +29,11 @@ public class ServeGameArenaObserver implements ArenaObserver {
 
 	@Override
 	public void notifyError(String errorMessage) {
-		serveGameUI.addError(errorMessage);
+		if(gameUI != null){
+			gameUI.addError(errorMessage);
+		} else {
+			serveGameUI.addError(errorMessage);
+		}
 	}
 
 	@Override
@@ -91,7 +96,11 @@ public class ServeGameArenaObserver implements ArenaObserver {
 
 	@Override
 	public void notifyTalk(Player player, String message) {
-		serveGameUI.addMessage(player.getName(), message);
+		if(gameUI != null){
+			gameUI.addMessage(player.getName(), message);
+		} else {
+			serveGameUI.addMessage(player.getName(), message);
+		}
 	}
 
 	@Override

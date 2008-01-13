@@ -6,7 +6,6 @@
         <comboBox name="gameProfile">Tetris Classic
         <popupMenu>
             <menuItem>Tetris Classic</menuItem>
-            <menuItem>Hard Tetris</menuItem>
         </popupMenu></comboBox>
         <button name="copy">Copy</button>
         <button name="save">Save</button>
@@ -18,10 +17,9 @@
 	    <group>
 	        <group>
 		        <label>Pieces:</label>
-		        <comboBox name="gamePieces" text="Classic">
+		        <comboBox name="gamePieces" text="classic">
 		        <popupMenu>
-		            <menuItem>Classic</menuItem>
-		            <menuItem>Pentamino</menuItem>
+		            <menuItem>classic</menuItem>
 		        </popupMenu></comboBox>
 	        </group>
 	        <break />
@@ -31,10 +29,10 @@
 	    <group>
 	        <group>
 	            <label>Grow delay:</label>
-	            <textField name="growDelay" size="60" />
+	            <textField name="growDelay" size="60">3</textField>
 	            <break />
 	            <label>Level score:</label>
-	            <textField name="levelScore" size="60" />
+	            <textField name="levelScore" size="60">5000</textField>
 	        </group>
 	        <break />
 	        <label bold="true">Points for lines:</label>
@@ -43,16 +41,16 @@
 	           <spacer width="39" />
 	           <group>
     	           <label>Single:</label>
-		           <textField name="points1" size="40" />
+		           <textField name="points1" size="40">100</textField>
 		           <break />
 		           <label>Double:</label>
-		           <textField name="points2" size="40" />
+		           <textField name="points2" size="40">300</textField>
 		           <break />
 		           <label>Triple:</label>
-		           <textField name="points3" size="40" />
+		           <textField name="points3" size="40">600</textField>
 		           <break />
 		           <label>Quad:</label>
-		           <textField name="points4" size="40" />
+		           <textField name="points4" size="40">1000</textField>
                </group>
 	        </group>
 	    </group>
@@ -65,7 +63,7 @@
         <break />
         <group>
             <spacer width="8" />
-	        <table width="286" height="60" name="players" showHScroll="false">
+	        <table width="286" height="100" name="players" showHScroll="false">
 	            <head width="100">Name</head>
 	            <head width="70">Origin</head>
 	            <head width="50">Status</head>
@@ -91,12 +89,12 @@
         <break />
         <group>
             <spacer width="8" />
-            <table width="286" height="100" name="messages" showHScroll="false">
+            <table width="286" height="120" name="messages" showHScroll="false">
                 <head width="60">Player</head>
                 <head width="210">Message</head>
                 <row>
                     <label>INFO</label>
-                    <label>Send your broadcast message here!</label>
+                    <label>Click Serve Game to start serving...</label>
                 </row>
             </table>
         </group>

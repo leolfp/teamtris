@@ -21,6 +21,8 @@ public class NetworkManager {
 	private static final Log log = LogFactory.getLog(NetworkManager.class);
 	
 	private static final AtomicInteger connId = new AtomicInteger(0);
+	
+	private static ArenaServer server;
 
 	/**
 	 * Connects to a remote arena pointed by the server hostname.
@@ -43,8 +45,15 @@ public class NetworkManager {
 	 * @param arena The arena to serve.
 	 */
 	public static void serveArena(ServingArena arena){
-		ArenaServer server = new ArenaServer(arena);
+		server = new ArenaServer(arena);
 		server.start();
-		// TODO How to stop serving the arena?
+	}
+	
+	/**
+	 * Stops serving the current serving arena.
+	 */
+	public static void stopServingArena() {
+		server.stopAndClose();
+		server = null;
 	}
 }
