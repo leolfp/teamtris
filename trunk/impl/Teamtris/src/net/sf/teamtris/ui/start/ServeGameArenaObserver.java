@@ -1,4 +1,4 @@
-package net.sf.teamtris.ui.serve;
+package net.sf.teamtris.ui.start;
 
 import java.util.List;
 import java.util.Map;

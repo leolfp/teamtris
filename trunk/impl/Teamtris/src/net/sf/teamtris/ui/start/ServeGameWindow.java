@@ -1,4 +1,4 @@
-package net.sf.teamtris.ui.serve;
+package net.sf.teamtris.ui.start;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +41,7 @@ public class ServeGameWindow  extends TeamtrisWindow implements ServeGameUI {
 	private Map<Integer, Row> players = new HashMap<Integer, Row>();
 	
 	public ServeGameWindow(){
-		super("Serve Game", "net/sf/teamtris/ui/serve/ServeGameWindow.xml", 318, 565);
+		super("Serve Game", "net/sf/teamtris/ui/start/ServeGameWindow.xml", 318, 565);
 		((Button) internalPane.findByName("send")).addActionListener(new Listener(controller, "sendMessage"));
 		((Button) internalPane.findByName("serveOrCancel")).addActionListener(new Listener(controller, "serveOrCancel"));
 		
@@ -108,7 +108,7 @@ public class ServeGameWindow  extends TeamtrisWindow implements ServeGameUI {
 	private Row newPlayer(){
 		Row row = new Row();
 		try {
-			new Parser(row, "net/sf/teamtris/ui/serve/Player.xml");
+			new Parser(row, "net/sf/teamtris/ui/start/Player.xml");
 		} catch (Exception e) {
 			log.fatal("Fail reading window serialization.", e);
 		}
@@ -118,7 +118,7 @@ public class ServeGameWindow  extends TeamtrisWindow implements ServeGameUI {
 	private Row newMessage(){
 		Row row = new Row();
 		try {
-			new Parser(row, "net/sf/teamtris/ui/serve/Message.xml");
+			new Parser(row, "net/sf/teamtris/ui/start/Message.xml");
 		} catch (Exception e) {
 			log.fatal("Fail reading window serialization.", e);
 		}

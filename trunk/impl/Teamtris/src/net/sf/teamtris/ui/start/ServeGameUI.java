@@ -1,4 +1,4 @@
-package net.sf.teamtris.ui.serve;
+package net.sf.teamtris.ui.start;
 
 
 public interface ServeGameUI {

@@ -4,7 +4,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import net.sf.teamtris.ui.TeamtrisWindow;
-import net.sf.teamtris.ui.serve.ServeGameWindow;
+import net.sf.teamtris.ui.start.ServeGameWindow;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
